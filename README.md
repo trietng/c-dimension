@@ -1,6 +1,6 @@
-# Defense of the Tower
+# C-DIMENSION
 
-![logo](https://raw.githubusercontent.com/hikki0901/CS427-project/main/Assets/sprites/Icon/icon.png)
+![logo](Assets/Icons/Icon.png)
 
 ## Team Culius
 
@@ -12,17 +12,17 @@ Members of our team:
 
 ## Introduction
 
-An simple isometric 3D tower-defense game.
+An simple 3D voxel puzzle-solving game, where the main character was accidently sent to a strange land where they has to get pass all the challenges to find their way home.
 
 ## Requirements
 
 - Unity version 2022.3.17f.
-- Supported platforms: Windows.
+- Supported platforms: Windows, WebGL.
 
 ## References
 
 All assets and sound effects used in this project were downloaded from the following pages:
 
-- https://itch.io
-- https://opengameart.org
-- https://pixabay.com/sound-effects
+- https://alesan99.itch.io/britebot
+- https://opengameart.org/content/pixel-art-wood-tiles
+- https://opengameart.org/content/pixel-art-brick-tiles
