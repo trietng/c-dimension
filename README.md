@@ -30,3 +30,4 @@ All assets, sound effects and shaders used in this project were downloaded from 
 - https://sketchfab.com/3d-models/blocky-trees-pack-da28681db805440a851462fd8682b4f0
 - https://github.com/Flaroon/Video-Files
 - https://styloo.itch.io/dungeon-asset-pack
+- https://github.com/johannesugb/VolumetricLinesUnity/tree/universal_render_pipeline
