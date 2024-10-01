@@ -29,3 +29,4 @@ All assets, sound effects and shaders used in this project were downloaded from 
 - https://assetstore.unity.com/packages/3d/characters/creatures/ghost-character-free-267003
 - https://sketchfab.com/3d-models/blocky-trees-pack-da28681db805440a851462fd8682b4f0
 - https://github.com/Flaroon/Video-Files
+- https://styloo.itch.io/dungeon-asset-pack
