@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,12 @@ namespace Sample
         // moving speed
         [SerializeField] private float Speed = 4;
         [SerializeField] private float pushStrength = 2f; // Strength to push the box
+        [SerializeField] private float JumpForce = 5f; // Force for jumping
+        private bool canJump = true; // Check if the player can jump
+
+        public bool enableJump;
+
+        [SerializeField] private Vector3 respawnPosition = new Vector3(1, 2, 1); // Default respawn position
 
         void Start()
         {
@@ -48,6 +55,7 @@ namespace Sample
                 MOVE();
                 PlayerAttack();
                 //Damage();
+                if (enableJump) Jump();
             }
             else if (PlayerStatus.ContainsValue(true))
             {
@@ -85,7 +93,17 @@ namespace Sample
                 DissolveFlg = false;
             }
         }
-
+        //---------------------------------------------------------------------
+        // Jump method using the spacebar
+        //---------------------------------------------------------------------
+        private void Jump()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && CheckGrounded()) // Jump if grounded and spacebar is pressed
+            {
+                MoveDirection.y = JumpForce; // Apply upward force
+                canJump = false; // Disable jumping while airborne
+            }
+        }
         //---------------------------------------------------------------------
         // character status
         //---------------------------------------------------------------------
@@ -159,12 +177,16 @@ namespace Sample
             {
                 if (CheckGrounded())
                 {
+                    canJump = true; // Re-enable jumping when grounded
                     if (MoveDirection.y < -0.1f)
                     {
                         MoveDirection.y = -0.1f;
                     }
                 }
-                MoveDirection.y -= 0.1f;
+                else
+                {
+                    MoveDirection.y -= 0.1f;
+                }
                 Ctrl.Move(MoveDirection * Time.deltaTime);
             }
         }
@@ -276,7 +298,7 @@ namespace Sample
                 HP = maxHP;
 
                 Ctrl.enabled = false;
-                this.transform.position = new Vector3(1, 2, 1); // Set respawn position to (1, 2, 1)
+                this.transform.position = respawnPosition;
                 this.transform.rotation = Quaternion.Euler(Vector3.zero); // player facing
                 Ctrl.enabled = true;
 
