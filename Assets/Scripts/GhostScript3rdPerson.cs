@@ -37,7 +37,6 @@ namespace Sample
 
         // Camera-related variables
         [SerializeField] private Transform cameraTransform; // Camera that follows the player
-        [SerializeField] private Vector3 cameraOffset = new Vector3(0, 5, -10); // Offset for the camera position
         [SerializeField] private float cameraSmoothSpeed = 0.125f; // Smooth speed for camera movement
 
         public float turnSmoothTime = 0.1f;
@@ -83,7 +82,6 @@ namespace Sample
             }
 
             // Update camera position every frame
-            UpdateCamera();
         }
 
         //---------------------------------------------------------------------
@@ -97,27 +95,12 @@ namespace Sample
                 canJump = false; // Disable jumping while airborne
 
                 // Trigger camera update when jumping
-                UpdateCamera();
             }
         }
 
         //---------------------------------------------------------------------
         // Camera follow method with rotation to match player movement
         //---------------------------------------------------------------------
-        private void UpdateCamera()
-        {
-            // Calculate the desired camera position based on the character's position and offset
-            Vector3 desiredPosition = this.transform.position + this.transform.TransformDirection(cameraOffset);
-
-            // Smoothly interpolate the camera's position for smoother movement
-            Vector3 smoothedPosition = Vector3.Lerp(cameraTransform.position, desiredPosition, cameraSmoothSpeed);
-
-            // Apply the new position to the camera
-            cameraTransform.position = smoothedPosition;
-
-            // Make the camera look at the player, ensuring it stays aligned with the player's movement
-            cameraTransform.LookAt(this.transform.position + Vector3.up * 1.5f); // Adjust the look height slightly above the player
-        }
 
 
         //---------------------------------------------------------------------
