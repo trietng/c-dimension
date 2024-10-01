@@ -3,317 +3,292 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sample {
-public class GhostScript : MonoBehaviour
+namespace Sample
 {
-    private Animator Anim;
-    private CharacterController Ctrl;
-    private Vector3 MoveDirection = Vector3.zero;
-    // Cache hash values
-    private static readonly int IdleState = Animator.StringToHash("Base Layer.idle");
-    private static readonly int MoveState = Animator.StringToHash("Base Layer.move");
-    private static readonly int SurprisedState = Animator.StringToHash("Base Layer.surprised");
-    private static readonly int AttackState = Animator.StringToHash("Base Layer.attack_shift");
-    private static readonly int DissolveState = Animator.StringToHash("Base Layer.dissolve");
-    private static readonly int AttackTag = Animator.StringToHash("Attack");
-    // dissolve
-    [SerializeField] private SkinnedMeshRenderer[] MeshR;
-    private float Dissolve_value = 1;
-    private bool DissolveFlg = false;
-    private const int maxHP = 3;
-    private int HP = maxHP;
-    private Text HP_text;
-
-    // moving speed
-    [SerializeField] private float Speed = 4;
-
-    void Start()
+    public class GhostScript : MonoBehaviour
     {
-        Anim = this.GetComponent<Animator>();
-        Ctrl = this.GetComponent<CharacterController>();
-        HP_text = GameObject.Find("Canvas/HP").GetComponent<Text>();
-        HP_text.text = "HP " + HP.ToString();
-    }
+        private Animator Anim;
+        private CharacterController Ctrl;
+        private Vector3 MoveDirection = Vector3.zero;
+        // Cache hash values
+        private static readonly int IdleState = Animator.StringToHash("Base Layer.idle");
+        private static readonly int MoveState = Animator.StringToHash("Base Layer.move");
+        private static readonly int SurprisedState = Animator.StringToHash("Base Layer.surprised");
+        private static readonly int AttackState = Animator.StringToHash("Base Layer.attack_shift");
+        private static readonly int DissolveState = Animator.StringToHash("Base Layer.dissolve");
+        private static readonly int AttackTag = Animator.StringToHash("Attack");
+        // dissolve
+        [SerializeField] private SkinnedMeshRenderer[] MeshR;
+        private float Dissolve_value = 1;
+        private bool DissolveFlg = false;
+        private const int maxHP = 3;
+        private int HP = maxHP;
+        private Text HP_text;
 
-    void Update()
-    {
-        STATUS();
-        GRAVITY();
-        Respawn();
-        // this character status
-        if(!PlayerStatus.ContainsValue( true ))
+        // moving speed
+        [SerializeField] private float Speed = 4;
+        [SerializeField] private float pushStrength = 2f; // Strength to push the box
+
+        void Start()
         {
-            MOVE();
-            PlayerAttack();
-            Damage();
+            Anim = this.GetComponent<Animator>();
+            Ctrl = this.GetComponent<CharacterController>();
+            //HP_text = GameObject.Find("Canvas/HP").GetComponent<Text>();
+            //HP_text.text = "HP " + HP.ToString();
         }
-        else if(PlayerStatus.ContainsValue( true ))
+
+        void Update()
         {
-            int status_name = 0;
-            foreach(var i in PlayerStatus)
+            STATUS();
+            GRAVITY();
+            Respawn();
+            // this character status
+            if (!PlayerStatus.ContainsValue(true))
             {
-                if(i.Value == true)
-                {
-                    status_name = i.Key;
-                    break;
-                }
-            }
-            if(status_name == Dissolve)
-            {
-                PlayerDissolve();
-            }
-            else if(status_name == Attack)
-            {
+                MOVE();
                 PlayerAttack();
+                //Damage();
             }
-            else if(status_name == Surprised)
+            else if (PlayerStatus.ContainsValue(true))
             {
-                // nothing method
-            }
-        }
-        // Dissolve
-        if(HP <= 0 && !DissolveFlg)
-        {
-            Anim.CrossFade(DissolveState, 0.1f, 0, 0);
-            DissolveFlg = true;
-        }
-        // processing at respawn
-        else if(HP == maxHP && DissolveFlg)
-        {
-            DissolveFlg = false;
-        }
-    }
-
-    //---------------------------------------------------------------------
-    // character status
-    //---------------------------------------------------------------------
-    private const int Dissolve = 1;
-    private const int Attack = 2;
-    private const int Surprised = 3;
-    private Dictionary<int, bool> PlayerStatus = new Dictionary<int, bool>
-    {
-        {Dissolve, false },
-        {Attack, false },
-        {Surprised, false },
-    };
-    //------------------------------
-    private void STATUS ()
-    {
-        // during dissolve
-        if(DissolveFlg && HP <= 0)
-        {
-            PlayerStatus[Dissolve] = true;
-        }
-        else if(!DissolveFlg)
-        {
-            PlayerStatus[Dissolve] = false;
-        }
-        // during attacking
-        if(Anim.GetCurrentAnimatorStateInfo(0).tagHash == AttackTag)
-        {
-            PlayerStatus[Attack] = true;
-        }
-        else if(Anim.GetCurrentAnimatorStateInfo(0).tagHash != AttackTag)
-        {
-            PlayerStatus[Attack] = false;
-        }
-        // during damaging
-        if(Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == SurprisedState)
-        {
-            PlayerStatus[Surprised] = true;
-        }
-        else if(Anim.GetCurrentAnimatorStateInfo(0).fullPathHash != SurprisedState)
-        {
-            PlayerStatus[Surprised] = false;
-        }
-    }
-    // dissolve shading
-    private void PlayerDissolve ()
-    {
-        Dissolve_value -= Time.deltaTime;
-        for(int i = 0; i < MeshR.Length; i++)
-        {
-            MeshR[i].material.SetFloat("_Dissolve", Dissolve_value);
-        }
-        if(Dissolve_value <= 0)
-        {
-            Ctrl.enabled = false;
-        }
-    }
-    // play a animation of Attack
-    private void PlayerAttack ()
-    {
-        if(Input.GetKeyDown(KeyCode.A))
-        {
-            Anim.CrossFade(AttackState,0.1f,0,0);
-        }
-    }
-    //---------------------------------------------------------------------
-    // gravity for fall of this character
-    //---------------------------------------------------------------------
-    private void GRAVITY ()
-    {
-        if(Ctrl.enabled)
-        {
-            if(CheckGrounded())
-            {
-                if(MoveDirection.y < -0.1f)
+                int status_name = 0;
+                foreach (var i in PlayerStatus)
                 {
-                    MoveDirection.y = -0.1f;
+                    if (i.Value == true)
+                    {
+                        status_name = i.Key;
+                        break;
+                    }
+                }
+                if (status_name == Dissolve)
+                {
+                    PlayerDissolve();
+                }
+                else if (status_name == Attack)
+                {
+                    PlayerAttack();
+                }
+                else if (status_name == Surprised)
+                {
+                    // nothing method
                 }
             }
-            MoveDirection.y -= 0.1f;
-            Ctrl.Move(MoveDirection * Time.deltaTime);
-        }
-    }
-    //---------------------------------------------------------------------
-    // whether it is grounded
-    //---------------------------------------------------------------------
-    private bool CheckGrounded()
-    {
-        if (Ctrl.isGrounded && Ctrl.enabled)
-        {
-            return true;
-        }
-        Ray ray = new Ray(this.transform.position + Vector3.up * 0.1f, Vector3.down);
-        float range = 0.2f;
-        return Physics.Raycast(ray, range);
-    }
-    //---------------------------------------------------------------------
-    // for slime moving
-    //---------------------------------------------------------------------
-    private void MOVE ()
-    {
-        // velocity
-        if(Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == MoveState)
-        {
-            if (Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            // Dissolve
+            if (HP <= 0 && !DissolveFlg)
             {
-                MOVE_Velocity(new Vector3(0, 0, -Speed), new Vector3(0, 180, 0));
+                Anim.CrossFade(DissolveState, 0.1f, 0, 0);
+                DissolveFlg = true;
             }
-            else if (Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            // processing at respawn
+            else if (HP == maxHP && DissolveFlg)
             {
-                MOVE_Velocity(new Vector3(0, 0, Speed), new Vector3(0, 0, 0));
-            }
-            else if (Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.RightArrow))
-            {
-                MOVE_Velocity(new Vector3(Speed, 0, 0), new Vector3(0, 90, 0));
-            }
-            else if (Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.LeftArrow))
-            {
-                MOVE_Velocity(new Vector3(-Speed, 0, 0), new Vector3(0, 270, 0));
+                DissolveFlg = false;
             }
         }
-        KEY_DOWN();
-        KEY_UP();
-    }
-    //---------------------------------------------------------------------
-    // value for moving
-    //---------------------------------------------------------------------
-    private void MOVE_Velocity (Vector3 velocity, Vector3 rot)
-    {
-        MoveDirection = new Vector3 (velocity.x, MoveDirection.y, velocity.z);
-        if(Ctrl.enabled)
+
+        //---------------------------------------------------------------------
+        // character status
+        //---------------------------------------------------------------------
+        private const int Dissolve = 1;
+        private const int Attack = 2;
+        private const int Surprised = 3;
+        private Dictionary<int, bool> PlayerStatus = new Dictionary<int, bool>
         {
-            Ctrl.Move(MoveDirection * Time.deltaTime);
-        }
-        MoveDirection.x = 0;
-        MoveDirection.z = 0;
-        this.transform.rotation = Quaternion.Euler(rot);
-    }
-    //---------------------------------------------------------------------
-    // whether arrow key is key down
-    //---------------------------------------------------------------------
-    private void KEY_DOWN ()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+            {Dissolve, false },
+            {Attack, false },
+            {Surprised, false },
+        };
+        //------------------------------
+        private void STATUS()
         {
-            Anim.CrossFade(MoveState, 0.1f, 0, 0);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            Anim.CrossFade(MoveState, 0.1f, 0, 0);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Anim.CrossFade(MoveState, 0.1f, 0, 0);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Anim.CrossFade(MoveState, 0.1f, 0, 0);
-        }
-    }
-    //---------------------------------------------------------------------
-    // whether arrow key is key up
-    //---------------------------------------------------------------------
-    private void KEY_UP ()
-    {
-        if (Input.GetKeyUp(KeyCode.UpArrow))
-        {
-            if(!Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            // during dissolve
+            if (DissolveFlg && HP <= 0)
             {
-                Anim.CrossFade(IdleState, 0.1f, 0, 0);
+                PlayerStatus[Dissolve] = true;
+            }
+            else if (!DissolveFlg)
+            {
+                PlayerStatus[Dissolve] = false;
+            }
+            // during attacking
+            if (Anim.GetCurrentAnimatorStateInfo(0).tagHash == AttackTag)
+            {
+                PlayerStatus[Attack] = true;
+            }
+            else if (Anim.GetCurrentAnimatorStateInfo(0).tagHash != AttackTag)
+            {
+                PlayerStatus[Attack] = false;
+            }
+            // during damaging
+            if (Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == SurprisedState)
+            {
+                PlayerStatus[Surprised] = true;
+            }
+            else if (Anim.GetCurrentAnimatorStateInfo(0).fullPathHash != SurprisedState)
+            {
+                PlayerStatus[Surprised] = false;
             }
         }
-        else if (Input.GetKeyUp(KeyCode.DownArrow))
+        // dissolve shading
+        private void PlayerDissolve()
         {
-            if(!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
-            {
-                Anim.CrossFade(IdleState, 0.1f, 0, 0);
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            if(!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.RightArrow))
-            {
-                Anim.CrossFade(IdleState, 0.1f, 0, 0);
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            if(!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.LeftArrow))
-            {
-                Anim.CrossFade(IdleState, 0.1f, 0, 0);
-            }
-        }
-    }
-    //---------------------------------------------------------------------
-    // damage
-    //---------------------------------------------------------------------
-    private void Damage ()
-    {
-        // Damaged by outside field.
-        if(Input.GetKeyUp(KeyCode.S))
-        {
-            Anim.CrossFade(SurprisedState, 0.1f, 0, 0);
-            HP--;
-            HP_text.text = "HP " + HP.ToString();
-        }
-    }
-    //---------------------------------------------------------------------
-    // respawn
-    //---------------------------------------------------------------------
-    private void Respawn ()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            // player HP
-            HP = maxHP;
-            
-            Ctrl.enabled = false;
-            this.transform.position = Vector3.zero; // player position
-            this.transform.rotation = Quaternion.Euler(Vector3.zero); // player facing
-            Ctrl.enabled = true;
-            
-            // reset Dissolve
-            Dissolve_value = 1;
-            for(int i = 0; i < MeshR.Length; i++)
+            Dissolve_value -= Time.deltaTime;
+            for (int i = 0; i < MeshR.Length; i++)
             {
                 MeshR[i].material.SetFloat("_Dissolve", Dissolve_value);
             }
-            // reset animation
-            Anim.CrossFade(IdleState, 0.1f, 0, 0);
+            if (Dissolve_value <= 0)
+            {
+                Ctrl.enabled = false;
+            }
+        }
+        // play a animation of Attack
+        private void PlayerAttack()
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Anim.CrossFade(AttackState, 0.1f, 0, 0);
+            }
+        }
+        //---------------------------------------------------------------------
+        // gravity for fall of this character
+        //---------------------------------------------------------------------
+        private void GRAVITY()
+        {
+            if (Ctrl.enabled)
+            {
+                if (CheckGrounded())
+                {
+                    if (MoveDirection.y < -0.1f)
+                    {
+                        MoveDirection.y = -0.1f;
+                    }
+                }
+                MoveDirection.y -= 0.1f;
+                Ctrl.Move(MoveDirection * Time.deltaTime);
+            }
+        }
+        //---------------------------------------------------------------------
+        // whether it is grounded
+        //---------------------------------------------------------------------
+        private bool CheckGrounded()
+        {
+            if (Ctrl.isGrounded && Ctrl.enabled)
+            {
+                return true;
+            }
+            Ray ray = new Ray(this.transform.position + Vector3.up * 0.1f, Vector3.down);
+            float range = 0.2f;
+            return Physics.Raycast(ray, range);
+        }
+        //---------------------------------------------------------------------
+        // for character moving
+        //---------------------------------------------------------------------
+        private void MOVE()
+        {
+            // velocity
+            if (Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == MoveState)
+            {
+                if (Input.GetKey(KeyCode.W))
+                {
+                    MOVE_Velocity(new Vector3(0, 0, Speed), new Vector3(0, 0, 0));
+                }
+                else if (Input.GetKey(KeyCode.S))
+                {
+                    MOVE_Velocity(new Vector3(0, 0, -Speed), new Vector3(0, 180, 0));
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    MOVE_Velocity(new Vector3(-Speed, 0, 0), new Vector3(0, -90, 0));
+                }
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    MOVE_Velocity(new Vector3(Speed, 0, 0), new Vector3(0, 90, 0));
+                }
+            }
+            KEY_DOWN();
+            KEY_UP();
+        }
+        //---------------------------------------------------------------------
+        // value for moving
+        //---------------------------------------------------------------------
+        private void MOVE_Velocity(Vector3 velocity, Vector3 rot)
+        {
+            MoveDirection = new Vector3(velocity.x, MoveDirection.y, velocity.z);
+            if (Ctrl.enabled)
+            {
+                Ctrl.Move(MoveDirection * Time.deltaTime);
+            }
+            MoveDirection.x = 0;
+            MoveDirection.z = 0;
+            this.transform.rotation = Quaternion.Euler(rot);
+        }
+        //---------------------------------------------------------------------
+        // whether WASD key is key down
+        //---------------------------------------------------------------------
+        private void KEY_DOWN()
+        {
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+            {
+                Anim.CrossFade(MoveState, 0.1f, 0, 0);
+            }
+        }
+        //---------------------------------------------------------------------
+        // whether WASD key is key up
+        //---------------------------------------------------------------------
+        private void KEY_UP()
+        {
+            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            {
+                if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+                {
+                    Anim.CrossFade(IdleState, 0.1f, 0, 0);
+                }
+            }
+        }
+
+        //---------------------------------------------------------------------
+        // collision detection and pushing mechanics for box
+        //---------------------------------------------------------------------
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Rigidbody box = hit.collider.attachedRigidbody;
+
+            // Only push if the object has a Rigidbody and is not kinematic (i.e., movable)
+            if (box != null && !box.isKinematic)
+            {
+                // Calculate push direction in X and Z, ignore Y
+                Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z); // Ignore the Y axis
+
+                // Apply force to the box in the horizontal plane
+                box.velocity = pushDir * pushStrength; // Apply velocity to the box
+            }
+        }
+
+        //---------------------------------------------------------------------
+        // respawn
+        //---------------------------------------------------------------------
+        private void Respawn()
+        {
+            if (Input.GetKeyDown(KeyCode.R)) // Changed to R key
+            {
+                // player HP
+                HP = maxHP;
+
+                Ctrl.enabled = false;
+                this.transform.position = new Vector3(1, 2, 1); // Set respawn position to (1, 2, 1)
+                this.transform.rotation = Quaternion.Euler(Vector3.zero); // player facing
+                Ctrl.enabled = true;
+
+                // reset Dissolve
+                Dissolve_value = 1;
+                for (int i = 0; i < MeshR.Length; i++)
+                {
+                    MeshR[i].material.SetFloat("_Dissolve", Dissolve_value);
+                }
+                // reset animation
+                Anim.CrossFade(IdleState, 0.1f, 0, 0);
+            }
         }
     }
-}
 }
