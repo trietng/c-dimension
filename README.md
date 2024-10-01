@@ -21,10 +21,11 @@ An simple 3D voxel puzzle-solving game, where the main character was accidently 
 
 ## References
 
-All assets and sound effects used in this project were downloaded from the following pages:
+All assets, sound effects and shaders used in this project were downloaded from the following pages:
 
 - https://alesan99.itch.io/britebot
 - https://opengameart.org/content/pixel-art-wood-tiles
 - https://opengameart.org/content/pixel-art-brick-tiles
 - https://assetstore.unity.com/packages/3d/characters/creatures/ghost-character-free-267003
 - https://sketchfab.com/3d-models/blocky-trees-pack-da28681db805440a851462fd8682b4f0
+- https://github.com/Flaroon/Video-Files
