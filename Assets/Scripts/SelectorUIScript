@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TextButton : MonoBehaviour
+{
+    // add callbacks in the inspector like for buttons
+    public UnityEvent onClick;
+
+	[SerializeField] public int levelID = 1;
+
+    public void OnPointerClick(PointerEventData pointerEventData)
+    {
+        //Output to console the clicked GameObject's name and the following message. You can replace this with your own actions for when clicking the GameObject.
+        Debug.Log(name + " Game Object Clicked!", levelID);
+
+        // invoke your event
+        onClick.Invoke();
+    }
+}

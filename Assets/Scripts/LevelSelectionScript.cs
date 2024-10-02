@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LevelSelectionScript : MonoBehaviour
 {
-    public GameObject gameObject;
     // Start is called before the first frame update
     void Start()
     {
