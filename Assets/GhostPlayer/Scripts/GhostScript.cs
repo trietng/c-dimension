@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +10,7 @@ namespace Sample
         private Animator Anim;
         private CharacterController Ctrl;
         private Vector3 MoveDirection = Vector3.zero;
+
         // Cache hash values
         private static readonly int IdleState = Animator.StringToHash("Base Layer.idle");
         private static readonly int MoveState = Animator.StringToHash("Base Layer.move");
@@ -18,6 +18,7 @@ namespace Sample
         private static readonly int AttackState = Animator.StringToHash("Base Layer.attack_shift");
         private static readonly int DissolveState = Animator.StringToHash("Base Layer.dissolve");
         private static readonly int AttackTag = Animator.StringToHash("Attack");
+
         // dissolve
         [SerializeField] private SkinnedMeshRenderer[] MeshR;
         private float Dissolve_value = 1;
@@ -28,18 +29,21 @@ namespace Sample
 
         // moving speed
         [SerializeField] private float Speed = 4;
-        [SerializeField] private float pushStrength = 2f; // Strength to push the box
-        [SerializeField] private float JumpForce = 5f; // Force for jumping
-        private bool canJump = true; // Check if the player can jump
+        [SerializeField] private float pushStrength = 2f;
+        [SerializeField] private float JumpForce = 5f;
+        private bool canJump = true;
 
+        // enabler
         public bool enableJump;
         public bool enable3rdPerson;
 
-        [SerializeField] private Vector3 respawnPosition = new Vector3(1, 2, 1); // Default respawn position
+        // respawn position
+        [SerializeField] private Vector3 respawnPosition = new Vector3(1, 2, 1);
+        public float respawnAngle = 0f;
 
-        // Camera-related variables
-        [SerializeField] private Transform cameraTransform; // Camera that follows the player
-        [SerializeField] private float cameraSmoothSpeed = 0.125f; // Smooth speed for camera movement
+        // camera related
+        [SerializeField] private Transform cameraTransform;
+        [SerializeField] private float cameraSmoothSpeed = 0.125f;
 
         public float turnSmoothTime = 0.1f;
         float turnSmoothVelocity;
@@ -102,17 +106,19 @@ namespace Sample
                 DissolveFlg = false;
             }
         }
+
         //---------------------------------------------------------------------
         // Jump method using the spacebar
         //---------------------------------------------------------------------
         private void Jump()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && CheckGrounded()) // Jump if grounded and spacebar is pressed
+            if (Input.GetKeyDown(KeyCode.Space) && CheckGrounded())
             {
-                MoveDirection.y = JumpForce; // Apply upward force
-                canJump = false; // Disable jumping while airborne
+                MoveDirection.y = JumpForce;
+                canJump = false;
             }
         }
+
         //---------------------------------------------------------------------
         // character status
         //---------------------------------------------------------------------
@@ -125,7 +131,6 @@ namespace Sample
             {Attack, false },
             {Surprised, false },
         };
-        //------------------------------
         private void STATUS()
         {
             // during dissolve
@@ -156,6 +161,7 @@ namespace Sample
                 PlayerStatus[Surprised] = false;
             }
         }
+
         // dissolve shading
         private void PlayerDissolve()
         {
@@ -169,6 +175,7 @@ namespace Sample
                 Ctrl.enabled = false;
             }
         }
+
         // play a animation of Attack
         private void PlayerAttack()
         {
@@ -177,6 +184,7 @@ namespace Sample
                 Anim.CrossFade(AttackState, 0.1f, 0, 0);
             }
         }
+
         //---------------------------------------------------------------------
         // gravity for fall of this character
         //---------------------------------------------------------------------
@@ -186,7 +194,7 @@ namespace Sample
             {
                 if (CheckGrounded())
                 {
-                    canJump = true; // Re-enable jumping when grounded
+                    canJump = true;
                     if (MoveDirection.y < -0.1f)
                     {
                         MoveDirection.y = -0.1f;
@@ -199,6 +207,7 @@ namespace Sample
                 Ctrl.Move(MoveDirection * Time.deltaTime);
             }
         }
+
         //---------------------------------------------------------------------
         // whether it is grounded
         //---------------------------------------------------------------------
@@ -212,12 +221,12 @@ namespace Sample
             float range = 0.2f;
             return Physics.Raycast(ray, range);
         }
+
         //---------------------------------------------------------------------
         // for character moving
         //---------------------------------------------------------------------
         private void MOVE()
         {
-            // velocity
             if (Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == MoveState)
             {
                 if (Input.GetKey(KeyCode.W))
@@ -241,14 +250,15 @@ namespace Sample
             KEY_UP();
         }
 
+        //---------------------------------------------------------------------
+        // for character moving in 3rd person PoV
+        //---------------------------------------------------------------------
         private void MOVE_3rd()
         {
-            // Get input for movement direction
-            float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right arrows
-            float vertical = Input.GetAxisRaw("Vertical");     // W/S or Up/Down arrows
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
             Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-            // If there is input, move and rotate the character
             if (direction.magnitude >= 0.1f)
             {
                 float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
@@ -262,11 +272,10 @@ namespace Sample
             }
             else
             {
-                // If no input, transition to idle state
                 Anim.CrossFade(IdleState, 0.1f, 0, 0);
             }
 
-            KEY_UP(); // Handle key up for stopping movement
+            KEY_UP();
         }
 
         //---------------------------------------------------------------------
@@ -283,6 +292,7 @@ namespace Sample
             MoveDirection.z = 0;
             this.transform.rotation = Quaternion.Euler(rot);
         }
+
         //---------------------------------------------------------------------
         // whether WASD key is key down
         //---------------------------------------------------------------------
@@ -293,6 +303,7 @@ namespace Sample
                 Anim.CrossFade(MoveState, 0.1f, 0, 0);
             }
         }
+
         //---------------------------------------------------------------------
         // whether WASD key is key up
         //---------------------------------------------------------------------
@@ -314,14 +325,10 @@ namespace Sample
         {
             Rigidbody box = hit.collider.attachedRigidbody;
 
-            // Only push if the object has a Rigidbody and is not kinematic (i.e., movable)
             if (box != null && !box.isKinematic)
             {
-                // Calculate push direction in X and Z, ignore Y
-                Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z); // Ignore the Y axis
-
-                // Apply force to the box in the horizontal plane
-                box.velocity = pushDir * pushStrength; // Apply velocity to the box
+                Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+                box.velocity = pushDir * pushStrength;
             }
         }
 
@@ -330,14 +337,14 @@ namespace Sample
         //---------------------------------------------------------------------
         private void Respawn()
         {
-            if (Input.GetKeyDown(KeyCode.R)) // Changed to R key
+            if (Input.GetKeyDown(KeyCode.R)) 
             {
-                // player HP
                 HP = maxHP;
 
                 Ctrl.enabled = false;
                 this.transform.position = respawnPosition;
-                this.transform.rotation = Quaternion.Euler(Vector3.zero); // player facing
+                if (!enable3rdPerson) this.transform.rotation = Quaternion.Euler(Vector3.zero);
+                else this.transform.rotation = Quaternion.Euler(0, respawnAngle, 0);
                 Ctrl.enabled = true;
 
                 // reset Dissolve
