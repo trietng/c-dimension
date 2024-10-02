@@ -219,7 +219,7 @@ namespace Sample
             }
             Ray ray = new Ray(this.transform.position + Vector3.up * 0.1f, Vector3.down);
             float range = 0.2f;
-            return Physics.Raycast(ray, range);
+            return Physics.Raycast(ray, range, LayerMask.GetMask("Ground"), QueryTriggerInteraction.Ignore);
         }
 
         //---------------------------------------------------------------------
