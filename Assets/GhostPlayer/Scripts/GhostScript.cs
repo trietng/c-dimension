@@ -33,8 +33,16 @@ namespace Sample
         private bool canJump = true; // Check if the player can jump
 
         public bool enableJump;
+        public bool enable3rdPerson;
 
         [SerializeField] private Vector3 respawnPosition = new Vector3(1, 2, 1); // Default respawn position
+
+        // Camera-related variables
+        [SerializeField] private Transform cameraTransform; // Camera that follows the player
+        [SerializeField] private float cameraSmoothSpeed = 0.125f; // Smooth speed for camera movement
+
+        public float turnSmoothTime = 0.1f;
+        float turnSmoothVelocity;
 
         void Start()
         {
@@ -52,7 +60,8 @@ namespace Sample
             // this character status
             if (!PlayerStatus.ContainsValue(true))
             {
-                MOVE();
+                if (!enable3rdPerson) MOVE();
+                else MOVE_3rd();
                 PlayerAttack();
                 //Damage();
                 if (enableJump) Jump();
@@ -231,6 +240,35 @@ namespace Sample
             KEY_DOWN();
             KEY_UP();
         }
+
+        private void MOVE_3rd()
+        {
+            // Get input for movement direction
+            float horizontal = Input.GetAxisRaw("Horizontal"); // A/D or Left/Right arrows
+            float vertical = Input.GetAxisRaw("Vertical");     // W/S or Up/Down arrows
+            Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+
+            // If there is input, move and rotate the character
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+
+
+                Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                Ctrl.Move(moveDir * Speed * Time.deltaTime);
+            }
+            else
+            {
+                // If no input, transition to idle state
+                Anim.CrossFade(IdleState, 0.1f, 0, 0);
+            }
+
+            KEY_UP(); // Handle key up for stopping movement
+        }
+
         //---------------------------------------------------------------------
         // value for moving
         //---------------------------------------------------------------------
