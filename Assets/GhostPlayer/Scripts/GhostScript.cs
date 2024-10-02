@@ -369,6 +369,12 @@ namespace Sample
             {
                 Respawn();
             }
+            else if (other.CompareTag("savepoint"))
+            {
+                // Update respawn position and angle to the savepoint's position and rotation
+                respawnPosition = other.transform.position;
+                respawnAngle = other.transform.eulerAngles.y;
+            }
         }
     }
 }
