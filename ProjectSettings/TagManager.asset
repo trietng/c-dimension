@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Cannon
   - Trap
+  - Projectile
   layers:
   - Default
   - TransparentFX
