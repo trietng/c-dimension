@@ -60,7 +60,7 @@ namespace Sample
         {
             STATUS();
             GRAVITY();
-            Respawn();
+            respawnBtn();
             // this character status
             if (!PlayerStatus.ContainsValue(true))
             {
@@ -337,24 +337,37 @@ namespace Sample
         //---------------------------------------------------------------------
         private void Respawn()
         {
-            if (Input.GetKeyDown(KeyCode.R)) 
+            HP = maxHP;
+
+            Ctrl.enabled = false;
+            this.transform.position = respawnPosition;
+            if (!enable3rdPerson) this.transform.rotation = Quaternion.Euler(Vector3.zero);
+            else this.transform.rotation = Quaternion.Euler(0, respawnAngle, 0);
+            Ctrl.enabled = true;
+
+            // reset Dissolve
+            Dissolve_value = 1;
+            for (int i = 0; i < MeshR.Length; i++)
             {
-                HP = maxHP;
+                MeshR[i].material.SetFloat("_Dissolve", Dissolve_value);
+            }
+            // reset animation
+            Anim.CrossFade(IdleState, 0.1f, 0, 0);
+        }
 
-                Ctrl.enabled = false;
-                this.transform.position = respawnPosition;
-                if (!enable3rdPerson) this.transform.rotation = Quaternion.Euler(Vector3.zero);
-                else this.transform.rotation = Quaternion.Euler(0, respawnAngle, 0);
-                Ctrl.enabled = true;
+        private void respawnBtn()
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                Respawn();
+            }
+        }
 
-                // reset Dissolve
-                Dissolve_value = 1;
-                for (int i = 0; i < MeshR.Length; i++)
-                {
-                    MeshR[i].material.SetFloat("_Dissolve", Dissolve_value);
-                }
-                // reset animation
-                Anim.CrossFade(IdleState, 0.1f, 0, 0);
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Trap"))
+            {
+                Respawn();
             }
         }
     }
