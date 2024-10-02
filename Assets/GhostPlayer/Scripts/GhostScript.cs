@@ -374,6 +374,8 @@ namespace Sample
                 // Update respawn position and angle to the savepoint's position and rotation
                 respawnPosition = other.transform.position;
                 respawnAngle = other.transform.eulerAngles.y;
+
+                other.gameObject.SetActive(false);
             }
         }
     }
