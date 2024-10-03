@@ -432,7 +432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450249365}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1295,11 +1295,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  enableJump: 0
+  jumpForce: 5
+  jumpCooldown: 0.1
+  airMultiplier: 0.5
   playerHeight: 2
   ground:
     serializedVersion: 2
     m_Bits: 8
   groundDrag: 5
+  respawnPosition: {x: 15, y: 2.5, z: -15}
+  respawnRotation: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
   orientation: {fileID: 1829742579}
 --- !u!1001 &1765090230
 PrefabInstance:
