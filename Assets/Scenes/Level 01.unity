@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 106434617}
   - component: {fileID: 106434618}
-  - component: {fileID: 106434619}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -157,20 +156,6 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &106434618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106434616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d38ec8c4e3e2d244a72ec9db71c81d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endScreenCanvas: {fileID: 1966954301}
-  triggerCounts: 0
---- !u!114 &106434619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -650,7 +635,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -220, y: -127.93}
+  m_AnchoredPosition: {x: -190, y: -127.93}
   m_SizeDelta: {x: 160, y: 49.6632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &388789178
@@ -697,7 +682,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1129959087}
+      - m_Target: {fileID: 1966954306}
         m_TargetAssemblyTypeName: StageComplete, Assembly-CSharp
         m_MethodName: GoToMenu
         m_Mode: 1
@@ -1487,7 +1472,6 @@ GameObject:
   - component: {fileID: 1129959084}
   - component: {fileID: 1129959086}
   - component: {fileID: 1129959085}
-  - component: {fileID: 1129959087}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -1557,21 +1541,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129959083}
   m_CullTransparentMesh: 1
---- !u!114 &1129959087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129959083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4dea99e9a82e0749be35f410b042329, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  warningText: {fileID: 380926583}
-  warningDuration: 2
-  fadeDuration: 1
 --- !u!1 &1390412853
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,7 +1624,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1129959087}
+      - m_Target: {fileID: 1966954306}
         m_TargetAssemblyTypeName: StageComplete, Assembly-CSharp
         m_MethodName: RestartStage
         m_Mode: 1
@@ -1833,7 +1802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220, y: -127.93}
+  m_AnchoredPosition: {x: 190, y: -127.93}
   m_SizeDelta: {x: 160, y: 49.6632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710842352
@@ -1880,7 +1849,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1129959087}
+      - m_Target: {fileID: 1966954306}
         m_TargetAssemblyTypeName: StageComplete, Assembly-CSharp
         m_MethodName: NextLevel
         m_Mode: 1
@@ -2042,8 +2011,9 @@ GameObject:
   - component: {fileID: 1966954304}
   - component: {fileID: 1966954303}
   - component: {fileID: 1966954302}
+  - component: {fileID: 1966954306}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: End Screen Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2132,6 +2102,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1966954306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966954301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dea99e9a82e0749be35f410b042329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningText: {fileID: 380926583}
+  endScreenCanvas: {fileID: 1966954301}
+  warningDuration: 2
+  fadeDuration: 1
 --- !u!1 &1967987023
 GameObject:
   m_ObjectHideFlags: 0

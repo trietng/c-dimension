@@ -5,27 +5,46 @@ using System.Collections;
 
 public class StageComplete : MonoBehaviour
 {
+    public static StageComplete Instance { get; private set; }
+
     public TMP_Text warningText;
+    public GameObject endScreenCanvas;
     public float warningDuration = 2f;
     public float fadeDuration = 1f;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
+        endScreenCanvas.SetActive(false);
         warningText.gameObject.SetActive(false);
     }
 
     public void SetUp()
     {
-        gameObject.SetActive(true);
+        endScreenCanvas.SetActive(true);
     }
 
     public void GoToMenu()
     {
+        endScreenCanvas.SetActive(false);
         SceneManager.LoadScene(0);
     }
 
     public void RestartStage()
     {
+        endScreenCanvas.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -35,6 +54,7 @@ public class StageComplete : MonoBehaviour
 
         if (nextLevelSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
+            endScreenCanvas.SetActive(false);
             SceneManager.LoadScene(nextLevelSceneIndex);
         }
         else
@@ -63,7 +83,6 @@ public class StageComplete : MonoBehaviour
             SetTextAlpha(alpha);
             yield return null;
         }
-
         SetTextAlpha(0f);
     }
 
