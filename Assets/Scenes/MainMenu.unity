@@ -638,7 +638,7 @@ MonoBehaviour:
   gameMaster: {fileID: 1102747697}
   playButton: {fileID: 1807920612}
   settingsButton: {fileID: 328680202}
-  quitButton: {fileID: 0}
+  quitButton: {fileID: 631892558}
   inactive: 0
 --- !u!114 &369603546
 MonoBehaviour:
@@ -1897,7 +1897,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -413.40405, w: -7.621277}
+  m_margin: {x: 19.7495, y: 0, z: -413.40405, w: -7.621277}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1937,8 +1937,8 @@ MonoBehaviour:
   - {x: 45, y: 0, z: 0}
   - {x: 0, y: -90, z: -45}
   - {x: -45, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -45, y: 0, z: 180}
+  - {x: 0, y: 90, z: 45}
   - {x: -45, y: 180, z: 0}
 --- !u!1 &982316839
 GameObject:
@@ -2107,15 +2107,15 @@ MonoBehaviour:
   - Survive from the lazer to reach the end
   - 
   - Explore this C-Surface freely of your own
-  levelPlayable: 010101010001
+  levelPlayable: 010101010101
   currentLevel: 0
   gameMaster: {fileID: 1102747697}
   facesFocus:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: -90, z: 0}
   - {x: -90, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -90, y: 0, z: 180}
+  - {x: 0, y: 90, z: 0}
   - {x: 0, y: 180, z: 0}
   inactive: 1
 --- !u!1 &1074715524
@@ -2757,7 +2757,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -358.8447, w: -127.89871}
+  m_margin: {x: 19.735031, y: 0, z: -358.8447, w: -127.89871}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

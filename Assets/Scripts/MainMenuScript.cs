@@ -24,6 +24,10 @@ public class MainMenuScript : MonoBehaviour
             inactive = true;
             StartCoroutine(toSelectionScreen());
         });
+
+        quitButton.onClick.AddListener(() => {
+            Application.Quit();
+        });
     }
 
     IEnumerator toSelectionScreen () {

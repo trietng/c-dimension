@@ -14,9 +14,9 @@ public class LevelCubesManager : MonoBehaviour
     [SerializeField] Vector3[] faces = new Vector3[6] {
         new Vector3(45, 0, 0),
         new Vector3(0, -90, -45),
-        new Vector3(-45, 180, 0),
-        new Vector3(0, 0, 0),
-        new Vector3(0, 0, 0),
+        new Vector3(-45, 0, 0),
+        new Vector3(-45, 0, 180),
+        new Vector3(0, 90, 45),
         new Vector3(90, 0, 0)
     };
 
@@ -24,8 +24,11 @@ public class LevelCubesManager : MonoBehaviour
     private float lastCheckedTime = -1f;
 
     private Vector3 lastRotDelta = Vector3.zero;
+    private Quaternion startRotation = Quaternion.Euler(0, 0, 0);
 
-    private Vector3 targetRotation;
+    private float rotationProgress = -1;
+
+    private Quaternion targetRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,42 +41,25 @@ public class LevelCubesManager : MonoBehaviour
 
     private void RandomizeAngle () {
         int choice = UnityEngine.Random.Range(1, 4); // 1 --> 3
+        float speed = UnityEngine.Random.Range(0, 1) == 0 ? randomSpeed : -randomSpeed;
         switch (choice) {
             case 1: // x
-                lastAngle = new Vector3(randomSpeed, 0, 0);
+                lastAngle = new Vector3(speed, 0, 0);
                 break;
             case 2: // y
-                lastAngle = new Vector3(0, randomSpeed, 0);
+                lastAngle = new Vector3(0, speed, 0);
                 break;
             case 3: // z
-                lastAngle = new Vector3(0, 0, randomSpeed);
+                lastAngle = new Vector3(0, 0, speed);
                 break;
         }
         lastCheckedTime = Time.time;
     }
 
-    private float floatModulus (float n, float d) {
-        int q = (int)(n / d);
-        return n - d * q;
-    }
-
-    private float toRange (float val) {
-        // [-180, 180)
-        return floatModulus(floatModulus(val, 360f) + 360f, 360f) - 180f;
-    }
-
-    private float closestAngle (float val1, float val2, float lastVal) {
-        val1 = toRange(val1);
-        val2 = toRange(val2);
-        float diff = val1 - val2;
-        if (diff < -180f) diff += 360f;
-        if (diff >= 180f) diff -= 360f;
-
-        return diff;
-    }
-
     public void setTarget (Vector3 vct) {
-        targetRotation = vct;
+        targetRotation = Quaternion.Euler(vct.x, vct.y, vct.z);
+        startRotation = transform.rotation;
+        rotationProgress = 0;
     }
 
     public void RotateToSurface (int levelID) {
@@ -95,19 +81,11 @@ public class LevelCubesManager : MonoBehaviour
             if (lastCheckedTime == -1f || Time.time - lastCheckedTime > periodTime) RandomizeAngle();
             Rotate(lastAngle * Time.deltaTime);
         }
-        else if (Vector3.Distance(targetRotation, transform.rotation.eulerAngles) >= 1E-3f) {
-            Vector3 rotDist = new Vector3 (
-                closestAngle(targetRotation.x, transform.rotation.eulerAngles.x, lastRotDelta.x),
-                closestAngle(targetRotation.y, transform.rotation.eulerAngles.y, lastRotDelta.y),
-                closestAngle(targetRotation.z, transform.rotation.eulerAngles.z, lastRotDelta.z)
-            );
-            Vector3 actualRot = rotDist * Time.deltaTime * focusSpeed;
+        else if (0 <= rotationProgress && rotationProgress < 1) {
+            rotationProgress += Time.deltaTime * focusSpeed;
+            transform.rotation = Quaternion.Lerp(startRotation, targetRotation, rotationProgress);
 
-            if (Math.Abs(actualRot.x) > Math.Abs(rotDist.x)) actualRot.x = rotDist.x;
-            if (Math.Abs(actualRot.y) > Math.Abs(rotDist.y)) actualRot.y = rotDist.y;
-            if (Math.Abs(actualRot.z) > Math.Abs(rotDist.z)) actualRot.z = rotDist.z;
-
-            Rotate(actualRot);
+            // Rotate(actualRot);
         }
     }
 }
