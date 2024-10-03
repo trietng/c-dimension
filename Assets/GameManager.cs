@@ -3,7 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject endScreenCanvas;
-    public TriggerPad[] triggerPads;
+    public int triggerCounts = 0;
 
     private void Start()
     {
@@ -12,18 +12,7 @@ public class GameManager : MonoBehaviour
 
     public void CheckAllPads()
     {
-        bool allTriggered = true;
-
-        foreach (TriggerPad pad in triggerPads)
-        {
-            if (!pad.IsTriggered())
-            {
-                allTriggered = false;
-                break;
-            }
-        }
-
-        if (allTriggered)
+        if (triggerCounts == 3)
         {
             endScreenCanvas.SetActive(true);
         }

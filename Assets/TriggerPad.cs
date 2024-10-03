@@ -10,6 +10,7 @@ public class TriggerPad : MonoBehaviour
         if (other.CompareTag("Box") && !isTriggered)
         {
             isTriggered = true;
+            gameManager.triggerCounts++;
             gameManager.CheckAllPads();
         }
     }
@@ -19,6 +20,7 @@ public class TriggerPad : MonoBehaviour
         if (other.CompareTag("Box") && isTriggered)
         {
             isTriggered = false;
+            gameManager.triggerCounts--;
             gameManager.CheckAllPads();
         }
     }
