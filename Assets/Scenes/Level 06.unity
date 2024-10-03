@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15900815, g: 0.51751715, b: 1.0386043, a: 1}
+  m_IndirectSpecularColor: {r: 0.15896621, g: 0.51753515, b: 1.0392404, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  enableJump: 0
-  jumpForce: 5
+  enableJump: 1
+  jumpForce: 7
   jumpCooldown: 0.1
   airMultiplier: 0.5
   playerHeight: 2
@@ -181,7 +181,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundDrag: 5
-  respawnPosition: {x: 15, y: 2.5, z: -15}
+  respawnPosition: {x: 32, y: 32, z: 32}
   respawnRotation: {x: 0, y: -0.70710677, z: 0, w: 0.70710677}
   orientation: {fileID: 395048698}
 --- !u!54 &199723692
