@@ -54,6 +54,7 @@ public class ProceduralGenerationScript : MonoBehaviour
                     StartCoroutine(WaterColumn(x, y, type));
                 }
                 else {
+                    if (type == BlockType.SAND && height < 2) height = 2;
                     StartCoroutine(Column(x, y, height, type));
                 }
             }
@@ -67,7 +68,6 @@ public class ProceduralGenerationScript : MonoBehaviour
         Instantiate(surfaceBlockPrefabs[(int)type], new Vector3(x, 2, y), Quaternion.identity);
         yield return null;
     }
-
 
     IEnumerator Column(int x, int y, int height, BlockType type)
     {
