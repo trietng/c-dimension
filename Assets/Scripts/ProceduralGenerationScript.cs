@@ -108,12 +108,12 @@ public class ProceduralGenerationScript : MonoBehaviour
             {
                 float nx = x / (float)WIDTH + SEED;
                 float ny = y / (float)HEIGHT + SEED;
-                float e = Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(nx, ny))
-                    + noise[0] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(2 * nx, 2 * ny))
-                    + noise[1] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(4 * nx, 4 * ny))
-                    + noise[2] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(8 * nx, 8 * ny))
-                    + noise[3] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(16 * nx, 16 * ny))
-                    + noise[4] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(32 * nx, 32 * ny));
+                float e = noise[0] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(nx, ny))
+                    + noise[1] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(2 * nx, 2 * ny))
+                    + noise[2] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(4 * nx, 4 * ny))
+                    + noise[3] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(8 * nx, 8 * ny))
+                    + noise[4] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(16 * nx, 16 * ny))
+                    + noise[5] * Unity.Mathematics.noise.snoise(new Unity.Mathematics.float2(32 * nx, 32 * ny));
                 e /= noise.Sum();
                 evalution[x, y] = e / 2f + 0.5f;
             }
