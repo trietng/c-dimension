@@ -638,7 +638,7 @@ MonoBehaviour:
   gameMaster: {fileID: 1102747697}
   playButton: {fileID: 1807920612}
   settingsButton: {fileID: 328680202}
-  quitButton: {fileID: 0}
+  quitButton: {fileID: 631892558}
   inactive: 0
 --- !u!114 &369603546
 MonoBehaviour:
