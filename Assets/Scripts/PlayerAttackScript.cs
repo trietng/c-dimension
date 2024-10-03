@@ -14,9 +14,9 @@ public class PlayerAttackScript : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Fire at the mouse position
-            if (Physics.Raycast(muzzle.position, muzzle.forward, out RaycastHit hit))
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
             {
-                GameObject go = Instantiate(shotPrefab, muzzle.position, muzzle.rotation);
+                GameObject go = Instantiate(shotPrefab, muzzle.position, Quaternion.identity);
                 go.transform.LookAt(hit.point);
                 Destroy(go, 30f);
             }

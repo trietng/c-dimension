@@ -31,3 +31,5 @@ All assets, sound effects and shaders used in this project were downloaded from 
 - https://github.com/Flaroon/Video-Files
 - https://styloo.itch.io/dungeon-asset-pack
 - https://github.com/johannesugb/VolumetricLinesUnity/tree/universal_render_pipeline
+- https://piiixl.itch.io/textures
+- http://gregschlom.com/devlog/2014/06/29/Poisson-disc-sampling-Unity.html
