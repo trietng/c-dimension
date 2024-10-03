@@ -6,10 +6,10 @@ using TMPro;
 public class UIManagerScript : MonoBehaviour
 {
     // add callbacks in the inspector like for buttons
-    [SerializeField] Canvas mainMenuCanvas;
-    [SerializeField] Canvas LevelSelectionCanvas;
+    [SerializeField] public Canvas mainMenuCanvas;
+    [SerializeField] public Canvas levelSelectionCanvas;
 
-    [SerializeField] GameObject WorldCube;
+    [SerializeField] public GameObject worldCube;
 
     void Start() {
 
