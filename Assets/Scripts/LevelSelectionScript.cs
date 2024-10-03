@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LevelsInformation {
@@ -122,7 +123,7 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
             if (inactive) return;
             setInactive();
             StartCoroutine(backToMenu());
-        });       
+        });
     }
 
     public void setActive () {
@@ -145,10 +146,15 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
     }
 
     IEnumerator toGameLevel () {
+        // hide menu
         FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
         mainMenuScript.hide();
+
+        // rotate cubes to make animation
         UIManagerScript script = gameMaster.GetComponent<UIManagerScript>();
         script.worldCube.GetComponent<LevelCubesManager>().setTarget(facesFocus[currentLevel]);
+
+        // visit the cube
         script.moveCameraTo(new Vector3(script.worldCube.transform.position.x, script.initialPosition.y, script.initialPosition.z));
         yield return new WaitUntil(() => !mainMenuScript.visible);
         yield return new WaitForSeconds(0.5f);
@@ -156,6 +162,20 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         // script.moveCameraTo(new Vector3(0, 0, script.initialPosition.z));
         // yield return new WaitForSeconds(1.0f);
         script.moveCameraTo(new Vector3(script.worldCube.transform.position.x, script.worldCube.transform.position.y, script.worldCube.transform.position.z - 25));
+        
+        // display loading screen
+        yield return new WaitForSeconds(0.5f);
+        GameObject loadingScreen = GameObject.Find("LoadingScreen");
+        LoadingCanvasScript loadScript = loadingScreen.GetComponent<LoadingCanvasScript>();
+        loadScript.show();
+        DontDestroyOnLoad(loadingScreen);
+
+        // load level (but still keep loading screen)
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentLevel + 1);
+        asyncLoad.completed += (e) => {
+            // hide loading screen (we will use loading screen for later)
+            loadScript.hide();
+        };
     }
 
     // Update is called once per frame
