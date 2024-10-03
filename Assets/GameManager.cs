@@ -4,7 +4,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public GameObject endScreenCanvas;
     public int triggerCounts = 0;
 
     private void Awake()
@@ -22,18 +21,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        endScreenCanvas.SetActive(false);
+        // Optionally initialize any other components or variables here if needed
     }
 
     public void CheckAllPads()
     {
         if (triggerCounts == 3)
         {
-            endScreenCanvas.SetActive(true);
+            StageComplete.Instance.SetUp();
         }
         else
         {
-            endScreenCanvas.SetActive(false);
+            StageComplete.Instance.endScreenCanvas.SetActive(false);
         }
     }
 }

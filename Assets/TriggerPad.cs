@@ -2,31 +2,21 @@ using UnityEngine;
 
 public class TriggerPad : MonoBehaviour
 {
-    public GameManager gameManager;
-    private bool isTriggered = false;
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Box") && !isTriggered)
+        if (other.CompareTag("Box"))
         {
-            isTriggered = true;
-            gameManager.triggerCounts++;
-            gameManager.CheckAllPads();
+            GameManager.Instance.triggerCounts++;
+            GameManager.Instance.CheckAllPads();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Box") && isTriggered)
+        if (other.CompareTag("Box"))
         {
-            isTriggered = false;
-            gameManager.triggerCounts--;
-            gameManager.CheckAllPads();
+            GameManager.Instance.triggerCounts--;
+            GameManager.Instance.CheckAllPads();
         }
-    }
-
-    public bool IsTriggered()
-    {
-        return isTriggered;
     }
 }
