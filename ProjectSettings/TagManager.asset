@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - savepoint
   - BlockLaser
+  - Box
   layers:
   - Default
   - TransparentFX
