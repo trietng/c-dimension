@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2741325313738847820
+--- !u!1 &2707342583752661503
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6017333619310954881}
-  - component: {fileID: 5064225216237843586}
+  - component: {fileID: 1531612624469990016}
+  - component: {fileID: -8462470505983652442}
   m_Layer: 3
-  m_Name: Sand01
+  m_Name: Rock01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6017333619310954881
+--- !u!4 &1531612624469990016
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2741325313738847820}
+  m_GameObject: {fileID: 2707342583752661503}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3739565837442884041}
+  - {fileID: 9032554222261029960}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5064225216237843586
+--- !u!65 &-8462470505983652442
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2741325313738847820}
+  m_GameObject: {fileID: 2707342583752661503}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -54,7 +54,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!1 &5566032160772134094
+--- !u!1 &4022687330885907490
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,9 +62,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3739565837442884041}
-  - component: {fileID: 6042054716124909841}
-  - component: {fileID: 1421278041528924430}
+  - component: {fileID: 9032554222261029960}
+  - component: {fileID: 4903083427939428065}
+  - component: {fileID: 5132252157507520518}
   m_Layer: 3
   m_Name: default
   m_TagString: Untagged
@@ -72,36 +72,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3739565837442884041
+--- !u!4 &9032554222261029960
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5566032160772134094}
+  m_GameObject: {fileID: 4022687330885907490}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6017333619310954881}
+  m_Father: {fileID: 1531612624469990016}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6042054716124909841
+--- !u!33 &4903083427939428065
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5566032160772134094}
-  m_Mesh: {fileID: -2432090755550338912, guid: 1e557320c09410743b3aa41bd64dcfba, type: 3}
---- !u!23 &1421278041528924430
+  m_GameObject: {fileID: 4022687330885907490}
+  m_Mesh: {fileID: -2432090755550338912, guid: 91471deb9b0c3e94a979d8cab4405d36, type: 3}
+--- !u!23 &5132252157507520518
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5566032160772134094}
+  m_GameObject: {fileID: 4022687330885907490}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -115,7 +115,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8334122390882957798, guid: 1e557320c09410743b3aa41bd64dcfba, type: 3}
+  - {fileID: 2342044170834805503, guid: 91471deb9b0c3e94a979d8cab4405d36, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

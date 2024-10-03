@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3760521998433394335}
   - component: {fileID: 8664912952433578473}
   - component: {fileID: 6885701418680737661}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2771643289552393687}
   - component: {fileID: -7472142980630755838}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Sand00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
