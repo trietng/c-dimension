@@ -22,6 +22,10 @@ public class LevelCubesManager : MonoBehaviour
 
     private Vector3 lastAngle = Vector3.zero;
     private float lastCheckedTime = -1f;
+
+    private Vector3 lastRotDelta = Vector3.zero;
+
+    private Vector3 targetRotation;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,8 +58,22 @@ public class LevelCubesManager : MonoBehaviour
     }
 
     private float toRange (float val) {
-        val = floatModulus(floatModulus(val, 360f) + 360f, 360f);
-        return val > 180f ? val - 360f : val;
+        // [-180, 180)
+        return floatModulus(floatModulus(val, 360f) + 360f, 360f) - 180f;
+    }
+
+    private float closestAngle (float val1, float val2, float lastVal) {
+        val1 = toRange(val1);
+        val2 = toRange(val2);
+        float diff = val1 - val2;
+        if (diff < -180f) diff += 360f;
+        if (diff >= 180f) diff -= 360f;
+
+        return diff;
+    }
+
+    public void setTarget (Vector3 vct) {
+        targetRotation = vct;
     }
 
     public void RotateToSurface (int levelID) {
@@ -65,6 +83,8 @@ public class LevelCubesManager : MonoBehaviour
             RandomizeAngle();
             return;
         }
+
+        setTarget(faces[focusLevel]);
     }
 
     // Update is called once per frame
@@ -75,19 +95,18 @@ public class LevelCubesManager : MonoBehaviour
             if (lastCheckedTime == -1f || Time.time - lastCheckedTime > periodTime) RandomizeAngle();
             Rotate(lastAngle * Time.deltaTime);
         }
-        else {
-            Vector3 face = faces[focusLevel];
+        else if (Vector3.Distance(targetRotation, transform.rotation.eulerAngles) >= 1E-3f) {
             Vector3 rotDist = new Vector3 (
-                toRange(face.x - transform.rotation.eulerAngles.x),
-                toRange(face.y - transform.rotation.eulerAngles.y),
-                toRange(face.z - transform.rotation.eulerAngles.z)
+                closestAngle(targetRotation.x, transform.rotation.eulerAngles.x, lastRotDelta.x),
+                closestAngle(targetRotation.y, transform.rotation.eulerAngles.y, lastRotDelta.y),
+                closestAngle(targetRotation.z, transform.rotation.eulerAngles.z, lastRotDelta.z)
             );
             Vector3 actualRot = rotDist * Time.deltaTime * focusSpeed;
 
             if (Math.Abs(actualRot.x) > Math.Abs(rotDist.x)) actualRot.x = rotDist.x;
             if (Math.Abs(actualRot.y) > Math.Abs(rotDist.y)) actualRot.y = rotDist.y;
             if (Math.Abs(actualRot.z) > Math.Abs(rotDist.z)) actualRot.z = rotDist.z;
-
+            
             Rotate(actualRot);
         }
     }

@@ -2109,6 +2109,13 @@ MonoBehaviour:
   levelPlayable: 010101000000
   currentLevel: 0
   gameMaster: {fileID: 1102747697}
+  facesFocus:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: -90, z: 0}
+  - {x: 0, y: 180, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   inactive: 1
 --- !u!1 &1074715524
 GameObject:
@@ -2263,6 +2270,9 @@ MonoBehaviour:
   mainMenuCanvas: {fileID: 369603541}
   levelSelectionCanvas: {fileID: 982316842}
   worldCube: {fileID: 980796030}
+  initialPosition: {x: 50, y: 0, z: -100}
+  camera: {fileID: 478923294}
+  movingSpeed: 2
 --- !u!4 &1102747699
 Transform:
   m_ObjectHideFlags: 0
@@ -2329,12 +2339,12 @@ PrefabInstance:
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.92387956
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.38268343
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
@@ -2349,7 +2359,7 @@ PrefabInstance:
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}

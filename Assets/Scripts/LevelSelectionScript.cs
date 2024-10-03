@@ -24,6 +24,15 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
 
     [SerializeField] GameObject gameMaster;
 
+    [SerializeField] Vector3[] facesFocus = new Vector3[6] {
+        new Vector3(0, 0, 0),
+        new Vector3(0, -90, 0),
+        new Vector3(0, 180, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(0, 0, 0),
+        new Vector3(0, 0, 0)
+    };
+
     [SerializeField] public bool inactive = false;
     
     public LevelsInformation[] levels = new LevelsInformation[6];
@@ -103,7 +112,8 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         playButton.onClick.AddListener(() => {
             if (inactive) return;
             if (!levels[currentLevel].playable) return;
-            Debug.Log("Selected level: " + currentLevel.ToString());
+            inactive = true;
+            StartCoroutine(toGameLevel());
         });
 
         // get back button
@@ -132,6 +142,20 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         yield return new WaitUntil(() => !mainMenuScript.visible);
         gameMaster.GetComponent<UIManagerScript>().mainMenuCanvas.GetComponent<FadingEffectsScript>().show();
         gameMaster.GetComponent<UIManagerScript>().mainMenuCanvas.GetComponent<MainMenuScript>().inactive = false;
+    }
+
+    IEnumerator toGameLevel () {
+        FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
+        mainMenuScript.hide();
+        UIManagerScript script = gameMaster.GetComponent<UIManagerScript>();
+        script.worldCube.GetComponent<LevelCubesManager>().setTarget(facesFocus[currentLevel]);
+        script.moveCameraTo(new Vector3(script.worldCube.transform.position.x, script.initialPosition.y, script.initialPosition.z));
+        yield return new WaitUntil(() => !mainMenuScript.visible);
+        yield return new WaitForSeconds(0.5f);
+        // enable back if also move z
+        // script.moveCameraTo(new Vector3(0, 0, script.initialPosition.z));
+        // yield return new WaitForSeconds(1.0f);
+        script.moveCameraTo(new Vector3(script.worldCube.transform.position.x, script.worldCube.transform.position.y, script.worldCube.transform.position.z - 25));
     }
 
     // Update is called once per frame
