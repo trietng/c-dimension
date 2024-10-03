@@ -54,6 +54,12 @@ namespace Sample
             Ctrl = this.GetComponent<CharacterController>();
             //HP_text = GameObject.Find("Canvas/HP").GetComponent<Text>();
             //HP_text.text = "HP " + HP.ToString();
+
+            if (enable3rdPerson)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
         }
 
         void Update()
