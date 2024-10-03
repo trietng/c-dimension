@@ -704,9 +704,9 @@ MonoBehaviour:
   - {fileID: 5539516120821248522, guid: 8518304cedfd2354db98de5bfdeefce0, type: 3}
   - {fileID: 2953033803653983844, guid: 56e6644e37faa5640b8919d83514936f, type: 3}
   - {fileID: 762429816026480467, guid: f9defcc5cfc1e1a409350f5c22acf17f, type: 3}
-  HEIGHT: 64
-  WIDTH: 64
-  DEPTH: 16
+  HEIGHT: 16
+  WIDTH: 16
+  DEPTH: 8
 --- !u!1 &1799182732
 GameObject:
   m_ObjectHideFlags: 0
