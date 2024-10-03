@@ -17,7 +17,7 @@ public class LevelCubesManager : MonoBehaviour
         new Vector3(-45, 180, 0),
         new Vector3(0, 0, 0),
         new Vector3(0, 0, 0),
-        new Vector3(0, 0, 0)
+        new Vector3(90, 0, 0)
     };
 
     private Vector3 lastAngle = Vector3.zero;
@@ -106,7 +106,7 @@ public class LevelCubesManager : MonoBehaviour
             if (Math.Abs(actualRot.x) > Math.Abs(rotDist.x)) actualRot.x = rotDist.x;
             if (Math.Abs(actualRot.y) > Math.Abs(rotDist.y)) actualRot.y = rotDist.y;
             if (Math.Abs(actualRot.z) > Math.Abs(rotDist.z)) actualRot.z = rotDist.z;
-            
+
             Rotate(actualRot);
         }
     }

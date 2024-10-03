@@ -27,10 +27,10 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
     [SerializeField] Vector3[] facesFocus = new Vector3[6] {
         new Vector3(0, 0, 0),
         new Vector3(0, -90, 0),
-        new Vector3(0, 180, 0),
+        new Vector3(-90, 0, 0),
         new Vector3(0, 0, 0),
         new Vector3(0, 0, 0),
-        new Vector3(0, 0, 0)
+        new Vector3(0, 180, 0)
     };
 
     [SerializeField] public bool inactive = false;

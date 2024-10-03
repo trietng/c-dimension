@@ -1936,10 +1936,10 @@ MonoBehaviour:
   faces:
   - {x: 45, y: 0, z: 0}
   - {x: 0, y: -90, z: -45}
+  - {x: -45, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   - {x: -45, y: 180, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
 --- !u!1 &982316839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,29 +2093,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNames:
-  - Box Pushing
+  - Sokoban
+  - Parkour
   - Maze
-  - Maze 2
+  - Blocked?
   - 
-  - 
-  - 
+  - Open World
   levelDescriptions:
-  - Push the boxes to their correct places. Perhaps you will be rewarded...
-  - Find the way out of this maze
-  - Find the way out of this maze
+  - Push the boxes to their correct places
+  - Run through the obstacle course to reach the center of the castle. Be careful
+    of waters!
+  - Find the way out of the illusive terrain
+  - Survive from the lazer to reach the end
   - 
-  - 
-  - 
-  levelPlayable: 010101000000
+  - Explore this C-Surface freely of your own
+  levelPlayable: 010101010001
   currentLevel: 0
   gameMaster: {fileID: 1102747697}
   facesFocus:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: -90, z: 0}
+  - {x: -90, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   - {x: 0, y: 180, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
   inactive: 1
 --- !u!1 &1074715524
 GameObject:
@@ -2339,12 +2340,12 @@ PrefabInstance:
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
@@ -2359,7 +2360,7 @@ PrefabInstance:
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
