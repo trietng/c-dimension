@@ -28,8 +28,8 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         new Vector3(0, 0, 0),
         new Vector3(0, -90, 0),
         new Vector3(-90, 0, 0),
-        new Vector3(0, 0, 0),
-        new Vector3(0, 0, 0),
+        new Vector3(-90, 0, 180),
+        new Vector3(0, 90, 0),
         new Vector3(0, 180, 0)
     };
 

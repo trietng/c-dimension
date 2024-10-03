@@ -1937,8 +1937,8 @@ MonoBehaviour:
   - {x: 45, y: 0, z: 0}
   - {x: 0, y: -90, z: -45}
   - {x: -45, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -45, y: 0, z: 180}
+  - {x: 0, y: 90, z: 45}
   - {x: -45, y: 180, z: 0}
 --- !u!1 &982316839
 GameObject:
@@ -2107,15 +2107,15 @@ MonoBehaviour:
   - Survive from the lazer to reach the end
   - 
   - Explore this C-Surface freely of your own
-  levelPlayable: 010101010001
+  levelPlayable: 010101010101
   currentLevel: 0
   gameMaster: {fileID: 1102747697}
   facesFocus:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: -90, z: 0}
   - {x: -90, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
+  - {x: -90, y: 0, z: 180}
+  - {x: 0, y: 90, z: 0}
   - {x: 0, y: 180, z: 0}
   inactive: 1
 --- !u!1 &1074715524
