@@ -1932,6 +1932,14 @@ MonoBehaviour:
   focusLevel: -1
   randomSpeed: 10
   periodTime: 5
+  focusSpeed: 5
+  faces:
+  - {x: 45, y: 0, z: 0}
+  - {x: 0, y: -90, z: -45}
+  - {x: -45, y: 180, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!1 &982316839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,22 +2329,22 @@ PrefabInstance:
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8535535
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.35355338
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.35355338
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.1464466
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
@@ -2346,7 +2354,7 @@ PrefabInstance:
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9047945525646267937, guid: f2282ff293aa34c6ca794fcaeae384d7,
         type: 3}

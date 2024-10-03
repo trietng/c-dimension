@@ -57,6 +57,8 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         if (levelID < 0 || levelID >= 6) return;
         currentLevel = levelID;
 
+        gameMaster.GetComponent<UIManagerScript>().worldCube.GetComponent<LevelCubesManager>().RotateToSurface(currentLevel);
+
         foreach (Button button in levelButtons) {
             button.GetComponentInChildren<TextMeshProUGUI>().fontStyle = TMPro.FontStyles.Normal;
         }
@@ -108,12 +110,20 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         Button backButton = Array.Find(buttons, x => x.name.Contains("BackButton"));
         backButton.onClick.AddListener(() => {
             if (inactive) return;
-            inactive = true;
+            setInactive();
             StartCoroutine(backToMenu());
-        });
+        });       
+    }
 
-        // load level 1
-        loadLevelInfo(0);
+    public void setActive () {
+        inactive = false;
+        // load last level
+        loadLevelInfo(currentLevel);
+    }
+
+    public void setInactive () {
+        inactive = true;
+        gameMaster.GetComponent<UIManagerScript>().worldCube.GetComponent<LevelCubesManager>().RotateToSurface(-1);
     }
 
     IEnumerator backToMenu () {

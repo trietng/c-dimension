@@ -31,7 +31,7 @@ public class MainMenuScript : MonoBehaviour
         mainMenuScript.hide();
         yield return new WaitUntil(() => !mainMenuScript.visible);
         gameMaster.GetComponent<UIManagerScript>().levelSelectionCanvas.GetComponent<FadingEffectsScript>().show();
-        gameMaster.GetComponent<UIManagerScript>().levelSelectionCanvas.GetComponent<LevelSelectionScript>().inactive = false;
+        gameMaster.GetComponent<UIManagerScript>().levelSelectionCanvas.GetComponent<LevelSelectionScript>().setActive();
     }
 
     // Update is called once per frame
