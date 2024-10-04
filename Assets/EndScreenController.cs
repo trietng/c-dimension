@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -41,8 +43,7 @@ public class StageComplete : MonoBehaviour
     {
         GameManager.Instance.triggerCounts = 0;
         Time.timeScale = 1f;
-        endScreenCanvas.SetActive(false);
-        SceneManager.LoadScene(0);
+        StartCoroutine(loadScene(0));
     }
 
     public void RestartStage()
@@ -61,13 +62,29 @@ public class StageComplete : MonoBehaviour
 
         if (nextLevelSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
-            endScreenCanvas.SetActive(false);
-            SceneManager.LoadScene(nextLevelSceneIndex);
+            StartCoroutine(loadScene(nextLevelSceneIndex));
         }
         else
         {
             StartCoroutine(ShowWarning());
         }
+    }
+
+    IEnumerator loadScene (int ID) {
+        GameObject loadingScreen = Array.Find(GameObject.FindObjectsOfType<GameObject>(true), s => s.name.Contains("LoadingScreen"));
+        LoadingCanvasScript loadScript = loadingScreen.GetComponent<LoadingCanvasScript>();
+        loadScript.show();
+
+        yield return new WaitUntil(() => loadScript.visible);
+
+        // load main menu (but still keep loading screen)
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(ID);
+        asyncLoad.completed += (e) => {
+            // hide loading screen
+            endScreenCanvas.SetActive(false);
+            loadScript.hide();
+            // loadScript.hide();
+        };
     }
 
     private IEnumerator ShowWarning()
