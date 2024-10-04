@@ -64,13 +64,12 @@ public class PauseController : MonoBehaviour
     {
         GameManager.Instance.triggerCounts = 0;
         if (SceneManager.GetActiveScene().buildIndex == 0) return;
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        StartCoroutine(loadMenu());
-        isPaused = false;
+        StartCoroutine(loadScene(0));
     }
 
-    IEnumerator loadMenu () {
+    IEnumerator loadScene (int ID) {
+        Time.timeScale = 1f;
+        if (pauseMenu != null) pauseMenu.SetActive(false);
         GameObject loadingScreen = Array.Find(GameObject.FindObjectsOfType<GameObject>(true), s => s.name.Contains("LoadingScreen"));
         LoadingCanvasScript loadScript = loadingScreen.GetComponent<LoadingCanvasScript>();
         loadScript.show();
@@ -78,24 +77,18 @@ public class PauseController : MonoBehaviour
         yield return new WaitUntil(() => loadScript.visible);
 
         // load main menu (but still keep loading screen)
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(0);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(ID);
         asyncLoad.completed += (e) => {
             // hide loading screen
             loadScript.hide();
             // loadScript.hide();
         };
+        isPaused = false;
     }
 
     public void Restart()
     {
         GameManager.Instance.triggerCounts = 0;
-        Time.timeScale = 1f;
-        if (pauseMenu != null)
-        {
-            pauseMenu.SetActive(false);
-        }
-        pauseMenu.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        isPaused = false;
+        StartCoroutine(loadScene(SceneManager.GetActiveScene().buildIndex));
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -35,6 +36,8 @@ public class FirstPersonMovements : MonoBehaviour
     Vector3 moveDir;
 
     Rigidbody rb;
+
+    public Action<int> onKeyCollected;
 
     void Start()
     {
@@ -135,6 +138,7 @@ public class FirstPersonMovements : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             ++keyCount;
+            onKeyCollected(keyCount);
         }
     }
 }

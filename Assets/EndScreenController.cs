@@ -50,8 +50,8 @@ public class StageComplete : MonoBehaviour
     {
         GameManager.Instance.triggerCounts = 0;
         Time.timeScale = 1f;
-        endScreenCanvas.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+        StartCoroutine(loadScene(SceneManager.GetActiveScene().buildIndex));
     }
 
     public void NextLevel()
