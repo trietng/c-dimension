@@ -7,6 +7,7 @@ namespace Sample
 {
     public class GhostScript : MonoBehaviour
     {
+        public int keyCount = 0;
         private Animator Anim;
         private CharacterController Ctrl;
         private Vector3 MoveDirection = Vector3.zero;
@@ -390,6 +391,11 @@ namespace Sample
 
                 other.gameObject.SetActive(false);
                 StageComplete.Instance.SetUp();
+            }
+            else if (other.CompareTag("Key"))
+            {
+                other.gameObject.SetActive(false);
+                ++keyCount;
             }
         }
     }
