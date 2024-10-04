@@ -34878,7 +34878,7 @@ MonoBehaviour:
   MeshR: []
   Speed: 4
   pushStrength: 2
-  JumpForce: 3
+  JumpForce: 5
   enableJump: 1
   enable3rdPerson: 1
   respawnPosition: {x: 15, y: 1, z: -15.5}
