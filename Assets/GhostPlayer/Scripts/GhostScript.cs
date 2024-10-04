@@ -387,6 +387,8 @@ namespace Sample
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+
+                other.gameObject.SetActive(false);
                 StageComplete.Instance.SetUp();
             }
         }

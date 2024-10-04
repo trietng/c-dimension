@@ -118,4 +118,16 @@ public class FirstPersonMovements : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Goal"))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            other.gameObject.SetActive(false);
+            StageComplete.Instance.SetUp();
+        }
+    }
 }
