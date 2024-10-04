@@ -1251,6 +1251,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadingSpeed: 2
+  quotes:
+  - Be careful of waters!
+  - Shiny gems may unlock the way to another world.
+  - Some boxes can be pushed. Use them for your advantage!
+  - Teardrops from the giants will save the progress of your journey
+  quoteTime: 5
   visible: 0
 --- !u!1 &328680201
 GameObject:
