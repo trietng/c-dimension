@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,8 +65,24 @@ public class PauseController : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex == 0) return;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        StartCoroutine(loadMenu());
         isPaused = false;
+    }
+
+    IEnumerator loadMenu () {
+        GameObject loadingScreen = Array.Find(GameObject.FindObjectsOfType<GameObject>(true), s => s.name.Contains("LoadingScreen"));
+        LoadingCanvasScript loadScript = loadingScreen.GetComponent<LoadingCanvasScript>();
+        loadScript.show();
+
+        yield return new WaitUntil(() => loadScript.visible);
+
+        // load main menu (but still keep loading screen)
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(0);
+        asyncLoad.completed += (e) => {
+            // hide loading screen
+            loadScript.hide();
+            // loadScript.hide();
+        };
     }
 
     public void Restart()

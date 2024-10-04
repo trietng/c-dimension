@@ -168,6 +168,7 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         GameObject loadingScreen = Array.Find(GameObject.FindObjectsOfType<GameObject>(true), s => s.name.Contains("LoadingScreen"));
         LoadingCanvasScript loadScript = loadingScreen.GetComponent<LoadingCanvasScript>();
         loadScript.show();
+        yield return new WaitUntil(() => loadScript.visible);
         DontDestroyOnLoad(loadingScreen);
 
         // load level (but still keep loading screen)
