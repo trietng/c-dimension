@@ -32,28 +32,26 @@ public class LoadingCanvasScript : MonoBehaviour
             else {
                 fadeIn = false;
                 visible = true;
-                canvas.sortingOrder = 100;
-                objective.interactable = true;
-                objective.blocksRaycasts = true;
             }
+            return;
         }
 
         if (fadeOut) {
             if (objective.alpha > 0) {
                 objective.alpha -= Time.deltaTime * fadingSpeed;
+                Debug.Log(objective.alpha.ToString() + " " + Time.deltaTime.ToString() + " " + fadingSpeed.ToString());
             }
             else {
                 fadeOut = false;
                 visible = false;
-                canvas.sortingOrder = -1;
-                objective.interactable = false;
-                objective.blocksRaycasts = false;
+                transform.gameObject.SetActive(false);
             }
         }
     }
 
     public void show () {
         fadeIn = true;
+        transform.gameObject.SetActive(true);
     }
 
     public void hide () {

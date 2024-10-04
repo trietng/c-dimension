@@ -144,7 +144,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 619237456645525429}
-  - component: {fileID: 5502933112339467680}
   m_Layer: 0
   m_Name: LoadingScreen
   m_TagString: Untagged
@@ -168,20 +167,6 @@ Transform:
   - {fileID: 7777753345294281616}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5502933112339467680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6355137328013895950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17ad033aa79704607a82aced5cf6dfa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadingSpeed: 5
-  visible: 0
 --- !u!1 &6486933698924497695
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +220,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
