@@ -33,23 +33,27 @@ public class StageComplete : MonoBehaviour
 
     public void SetUp()
     {
+        Time.timeScale = 0f;
         endScreenCanvas.SetActive(true);
     }
 
     public void GoToMenu()
     {
+        Time.timeScale = 1f;
         endScreenCanvas.SetActive(false);
         SceneManager.LoadScene(0);
     }
 
     public void RestartStage()
     {
+        Time.timeScale = 1f;
         endScreenCanvas.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void NextLevel()
     {
+        Time.timeScale = 1f;
         int nextLevelSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
         if (nextLevelSceneIndex < SceneManager.sceneCountInBuildSettings)
