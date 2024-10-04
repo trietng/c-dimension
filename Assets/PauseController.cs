@@ -49,7 +49,7 @@ public class PauseController : MonoBehaviour
 
     public void ResumeGame()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 2 || SceneManager.GetActiveScene().buildIndex == 3)
+        if (SceneManager.GetActiveScene().buildIndex > 1)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
