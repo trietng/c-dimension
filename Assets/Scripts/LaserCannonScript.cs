@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 public class LaserCannonScript : MonoBehaviour
 {
     private static readonly float MAX_DISTANCE = 1000f;
-    private readonly RaycastHit[] hits = new RaycastHit[32];
+    private RaycastHit[] hits = new RaycastHit[32];
     public Transform muzzle;
     public GameObject shotPrefab;
     private GameObject shot;
@@ -27,24 +26,32 @@ public class LaserCannonScript : MonoBehaviour
 
     public void Fire()
     {
-        // Last hit is the closest hit
+        // Perform raycast and get the number of hits
         int hitCount = Physics.RaycastNonAlloc(muzzle.position, -muzzle.forward, hits, MAX_DISTANCE);
-        if (hits.Length == 0) {
+
+        // If there are no hits, return early
+        if (hitCount == 0)
+        {
             return;
         }
-        Vector3 destination = hits.First().point;
-        for (int j = hitCount - 1; j > 0; j--)
-        {
-            // TODO: Kill player if hit
 
-            // If the hit target can block the laser, then the laser should stop at the hit point.
+        Vector3 destination = hits[0].point;
+
+        // Iterate over the hits from the closest to farthest
+        for (int j = 0; j < hitCount; j++)
+        {
+            // If the hit object has the "BlockLaser" tag, stop the laser at the hit point
             if (hits[j].collider.gameObject.CompareTag("BlockLaser"))
             {
                 destination = hits[j].point;
                 break;
             }
         }
+
+        // Debug line to visualize the ray
         Debug.DrawLine(muzzle.position, destination, Color.red, 1f);
+
+        // Set laser line visual positions
         lineBehavior.StartPos = muzzle.localPosition;
         float distance = Vector3.Distance(muzzle.position, destination) / shot.transform.localScale.z;
         lineBehavior.EndPos = new Vector3(
@@ -52,10 +59,12 @@ public class LaserCannonScript : MonoBehaviour
             muzzle.localPosition.y,
             muzzle.localPosition.z - distance
         );
+
+        // Update collider size and position to match the laser
         shotCollider.center = new Vector3(
             shotCollider.center.x,
             shotCollider.center.y,
-            - distance / 2
+            -distance / 2
         );
         shotCollider.size = new Vector3(
             shotCollider.size.x,
