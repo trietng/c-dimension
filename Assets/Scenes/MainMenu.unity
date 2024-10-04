@@ -3950,15 +3950,15 @@ MonoBehaviour:
   - Parkour
   - Maze
   - Blocked?
-  - 
+  - Shooting
   - Open World
   levelDescriptions:
   - Push the boxes to their correct places
   - Run through the obstacle course to reach the center of the castle. Be careful
     of waters!
   - Find the way out of the illusive terrain
-  - Survive from the lazer to reach the end
-  - 
+  - Survive from the lazer and reach the end
+  - Fight to survive!
   - Explore this C-Surface freely of your own
   levelPlayable: 010101010101
   currentLevel: 0
