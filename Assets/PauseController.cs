@@ -62,6 +62,7 @@ public class PauseController : MonoBehaviour
 
     public void toMenu()
     {
+        GameManager.Instance.triggerCounts = 0;
         if (SceneManager.GetActiveScene().buildIndex == 0) return;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
@@ -87,6 +88,7 @@ public class PauseController : MonoBehaviour
 
     public void Restart()
     {
+        GameManager.Instance.triggerCounts = 0;
         Time.timeScale = 1f;
         if (pauseMenu != null)
         {

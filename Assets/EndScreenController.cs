@@ -39,6 +39,7 @@ public class StageComplete : MonoBehaviour
 
     public void GoToMenu()
     {
+        GameManager.Instance.triggerCounts = 0;
         Time.timeScale = 1f;
         endScreenCanvas.SetActive(false);
         SceneManager.LoadScene(0);
@@ -46,6 +47,7 @@ public class StageComplete : MonoBehaviour
 
     public void RestartStage()
     {
+        GameManager.Instance.triggerCounts = 0;
         Time.timeScale = 1f;
         endScreenCanvas.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -53,6 +55,7 @@ public class StageComplete : MonoBehaviour
 
     public void NextLevel()
     {
+        GameManager.Instance.triggerCounts = 0;
         Time.timeScale = 1f;
         int nextLevelSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
 
