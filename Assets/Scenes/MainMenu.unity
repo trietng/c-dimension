@@ -3947,11 +3947,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNames:
   - Sokoban
-  - Parkour
+  - Obstacles
   - Maze
   - Blocked?
   - Shooting
-  - Open World
+  - Exploration
   levelDescriptions:
   - Push the boxes to their correct places
   - Run through the obstacle course to reach the center of the castle. Be careful
