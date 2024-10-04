@@ -70,6 +70,8 @@ public class ProceduralGenerationScript : MonoBehaviour
 
     IEnumerator Column(int x, int y, int height, BlockType type)
     {
+        Instantiate(surfaceBlockPrefabs[(int)type], new Vector3(x, height - 1, y), Quaternion.identity);
+        yield return null;
         GameObject block = blockPrefabs[(int)type];
         int d = HeightDifference(x, y);
         for (int z = height - d; z < height - 1; z++)
@@ -77,8 +79,6 @@ public class ProceduralGenerationScript : MonoBehaviour
             Instantiate(block, new Vector3(x, z, y), Quaternion.identity);
             yield return null;
         }
-        Instantiate(surfaceBlockPrefabs[(int)type], new Vector3(x, height - 1, y), Quaternion.identity);
-        yield return null;
     }
 
     int HeightDifference(int x, int y)

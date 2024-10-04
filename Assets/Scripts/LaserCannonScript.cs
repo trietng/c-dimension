@@ -60,7 +60,7 @@ public class LaserCannonScript : MonoBehaviour
         shotCollider.size = new Vector3(
             shotCollider.size.x,
             shotCollider.size.y,
-            - distance
+            distance
         );
     }
 }
