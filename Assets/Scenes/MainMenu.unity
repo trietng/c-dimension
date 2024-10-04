@@ -3959,7 +3959,7 @@ MonoBehaviour:
   - Find the way out of the illusive terrain
   - Survive from the lazer and reach the end
   - Fight to survive!
-  - Explore this C-Surface freely of your own
+  - Explore this map to find the treasure!
   levelPlayable: 010101010101
   currentLevel: 0
   gameMaster: {fileID: 1102747697}
