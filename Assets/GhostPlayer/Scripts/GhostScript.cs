@@ -382,6 +382,12 @@ namespace Sample
                 respawnAngle = other.transform.eulerAngles.y;
 
                 other.gameObject.SetActive(false);
+            } 
+            else if (other.CompareTag("Goal"))
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+                StageComplete.Instance.SetUp();
             }
         }
     }

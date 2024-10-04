@@ -10,6 +10,7 @@ TagManager:
   - savepoint
   - BlockLaser
   - Box
+  - Goal
   layers:
   - Default
   - TransparentFX
