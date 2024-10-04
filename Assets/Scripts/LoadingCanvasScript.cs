@@ -39,7 +39,6 @@ public class LoadingCanvasScript : MonoBehaviour
         if (fadeOut) {
             if (objective.alpha > 0) {
                 objective.alpha -= Time.deltaTime * fadingSpeed;
-                Debug.Log(objective.alpha.ToString() + " " + Time.deltaTime.ToString() + " " + fadingSpeed.ToString());
             }
             else {
                 fadeOut = false;
