@@ -3930,10 +3930,9 @@ MonoBehaviour:
   - Exploration
   levelDescriptions:
   - Push the boxes to their correct places
-  - Run through the obstacle course to reach the center of the castle. Be careful
-    of waters!
+  - Run through the obstacle course to reach the center of the castle
   - Find the way out of the illusive terrain
-  - Survive from the lazer and reach the end
+  - Disable the lazers to obtain rewards
   - Fight to survive!
   - Explore this map to find the treasure!
   levelPlayable: 010101010101
