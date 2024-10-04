@@ -44,22 +44,21 @@ public class ProceduralGenerationScript : MonoBehaviour
 
     void Draw()
     {
+        // Inner blocks
         for (int x = 0; x < WIDTH; x++)
         {
             for (int y = 0; y < HEIGHT; y++)
             {
-                int height = (int)(evalution[x, y] * DEPTH);
+                int height = Height(evalution[x, y]);
                 BlockType type = Biome(evalution[x, y]);
                 if (type == BlockType.WATER) {
                     StartCoroutine(WaterColumn(x, y, type));
                 }
                 else {
-                    if (type == BlockType.SAND && height < 2) height = 2;
                     StartCoroutine(Column(x, y, height, type));
                 }
             }
         }
-
     }
 
     IEnumerator WaterColumn(int x, int y, BlockType type)
@@ -72,12 +71,32 @@ public class ProceduralGenerationScript : MonoBehaviour
     IEnumerator Column(int x, int y, int height, BlockType type)
     {
         GameObject block = blockPrefabs[(int)type];
-        for (int z = 0; z < height - 1; z++)
+        int d = HeightDifference(x, y);
+        for (int z = height - d; z < height - 1; z++)
         {
             Instantiate(block, new Vector3(x, z, y), Quaternion.identity);
             yield return null;
         }
         Instantiate(surfaceBlockPrefabs[(int)type], new Vector3(x, height - 1, y), Quaternion.identity);
+        yield return null;
+    }
+
+    int HeightDifference(int x, int y)
+    {
+        int dLeft = x > 0 ? HeightDifferenceRaw(evalution[x, y], evalution[x - 1, y]) : 0;
+        int dRight = x < WIDTH - 1 ? HeightDifferenceRaw(evalution[x, y], evalution[x + 1, y]) : 0;
+        int dBack = y > 0 ? HeightDifferenceRaw(evalution[x, y], evalution[x, y - 1]) : 0;
+        int dForward = y < HEIGHT - 1 ? HeightDifferenceRaw(evalution[x, y], evalution[x, y + 1]) : 0;
+        return Math.Max(dLeft, Math.Max(dRight, Math.Max(dBack, dForward)));
+    }
+
+    int HeightDifferenceRaw(float here, float there)
+    {
+        if (Biome(there) == BlockType.WATER) {
+            return Mathf.RoundToInt(here * DEPTH);
+        }
+        // Make sure the height difference is at least 1
+        return Mathf.CeilToInt(Math.Abs(here - there) * DEPTH);
     }
 
     void GrowPoissonForest()
@@ -85,7 +104,7 @@ public class ProceduralGenerationScript : MonoBehaviour
         PoissonDiscSampler sampler = new(WIDTH, HEIGHT, 16);
         foreach (Vector2 sample in sampler.Samples())
         {
-            int height = (int)(evalution[(int)sample.x, (int)sample.y] * DEPTH);
+            int height = Height(evalution[(int)sample.x, (int)sample.y]);
             if (Biome(evalution[(int)sample.x, (int)sample.y]) == BlockType.GRASS)
             {
                 GameObject tree = treePrefabs[UnityEngine.Random.Range(0, treePrefabs.Length)];
@@ -148,5 +167,9 @@ public class ProceduralGenerationScript : MonoBehaviour
         else if (e < 0.6f) return BlockType.GRASS;
         else if (e < 0.8f) return BlockType.STONE;
         else return BlockType.SNOW;
+    }
+
+    int Height(float e) {
+        return Mathf.RoundToInt(e * DEPTH);
     }
 }
