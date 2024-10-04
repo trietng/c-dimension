@@ -16,12 +16,17 @@ public class MazeDoor : MonoBehaviour
     void Start () {
         keysText = GameObject.Find("LevelUI").GetComponentInChildren<TextMeshProUGUI>();
         keysText.text = "0 / " + requirement.ToString();
-        player.onKeyCollected = (key) => {
+        if (player != null) player.onKeyCollected = (key) => {
             keysText.text = key.ToString() + " / " + requirement.ToString();
-            if (
-                (player != null && player.keyCount == requirement) ||
-                (ghost != null && ghost.keyCount == requirement)
-            )
+            if (player.keyCount == requirement)
+            {
+                keysText.color = Color.green;
+                gameObject.SetActive(false);
+            }
+        };
+        if (ghost != null) ghost.onKeyCollected = (key) => {
+            keysText.text = key.ToString() + " / " + requirement.ToString();
+            if (ghost.keyCount == requirement)
             {
                 keysText.color = Color.green;
                 gameObject.SetActive(false);

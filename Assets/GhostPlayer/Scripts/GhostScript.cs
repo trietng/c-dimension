@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,6 +49,8 @@ namespace Sample
 
         public float turnSmoothTime = 0.1f;
         float turnSmoothVelocity;
+
+        public Action<int> onKeyCollected;
 
         void Start()
         {
@@ -396,6 +399,7 @@ namespace Sample
             {
                 other.gameObject.SetActive(false);
                 ++keyCount;
+                onKeyCollected(keyCount);
             }
         }
     }
