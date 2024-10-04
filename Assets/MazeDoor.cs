@@ -18,7 +18,10 @@ public class MazeDoor : MonoBehaviour
         keysText.text = "0 / " + requirement.ToString();
         player.onKeyCollected = (key) => {
             keysText.text = key.ToString() + " / " + requirement.ToString();
-            if (player.keyCount == requirement || ghost.keyCount == requirement)
+            if (
+                (player != null && player.keyCount == requirement) ||
+                (ghost != null && ghost.keyCount == requirement)
+            )
             {
                 keysText.color = Color.green;
                 gameObject.SetActive(false);
