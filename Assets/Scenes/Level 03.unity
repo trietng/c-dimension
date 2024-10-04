@@ -1066,6 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1721384214}
+  requirement: 2
 --- !u!1001 &1207301965
 PrefabInstance:
   m_ObjectHideFlags: 0

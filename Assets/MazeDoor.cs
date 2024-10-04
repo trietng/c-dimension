@@ -5,10 +5,10 @@ using UnityEngine;
 public class MazeDoor : MonoBehaviour
 {
     public FirstPersonMovements player;
-
+    public int requirement = 0;
     void Update()
     {
-        if (player.keyCount == 2)
+        if (player.keyCount == requirement)
         {
             gameObject.SetActive(false);
         }
