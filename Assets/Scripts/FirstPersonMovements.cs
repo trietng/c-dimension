@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class FirstPersonMovements : MonoBehaviour
 {
+    public int keyCount = 0;
+
     [Header("Movement")]
     public float moveSpeed;
 
@@ -128,6 +130,11 @@ public class FirstPersonMovements : MonoBehaviour
 
             other.gameObject.SetActive(false);
             StageComplete.Instance.SetUp();
+        } 
+        else if (other.CompareTag("Key"))
+        {
+            other.gameObject.SetActive(false);
+            ++keyCount;
         }
     }
 }
