@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class PlasmaShotScript : MonoBehaviour
 {
+    public GameObject bulletHoleProjector;
+    public float timeToDestroy = 3f;
+
     // Update is called once per frame
-    void Update () 
+    void Update()
     {
 		transform.position += 10f * Time.deltaTime * transform.forward;
 	}
@@ -22,6 +25,8 @@ public class PlasmaShotScript : MonoBehaviour
         }
         if (!other.gameObject.CompareTag("PlayerObj") && !other.gameObject.CompareTag("Projectile"))
         {
+            GameObject bulletHole = Instantiate(bulletHoleProjector, transform.position, transform.rotation);
+            Destroy(bulletHole, 3f);
             Destroy(gameObject);
         }
     }

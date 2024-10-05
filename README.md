@@ -33,3 +33,5 @@ All assets, sound effects and shaders used in this project were downloaded from 
 - https://github.com/johannesugb/VolumetricLinesUnity/tree/universal_render_pipeline
 - https://piiixl.itch.io/textures
 - http://gregschlom.com/devlog/2014/06/29/Poisson-disc-sampling-Unity.html
+- https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633
+- https://opengameart.org/content/bullet-decal

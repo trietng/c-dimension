@@ -205,6 +205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2f55bb36194fd42bd12534f3e2caa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletHoleProjector: {fileID: 8353209998792712441, guid: ac4c678770a3dc649984373a4a6cc860,
+    type: 3}
+  timeToDestroy: 3
 --- !u!65 &6986476807235583896
 BoxCollider:
   m_ObjectHideFlags: 0
