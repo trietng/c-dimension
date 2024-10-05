@@ -117,10 +117,10 @@ public class ProceduralGenerationScript : MonoBehaviour
 
     int MaxHeightDifference(int x, int y)
     {
-        int dLeft = x > 0 ? HeightDifference(evalution[x, y], evalution[x - 1, y]) : 0;
-        int dRight = x < WIDTH - 1 ? HeightDifference(evalution[x, y], evalution[x + 1, y]) : 0;
-        int dBack = y > 0 ? HeightDifference(evalution[x, y], evalution[x, y - 1]) : 0;
-        int dForward = y < HEIGHT - 1 ? HeightDifference(evalution[x, y], evalution[x, y + 1]) : 0;
+        int dLeft = HeightDifference(evalution[x, y], evalution[x - 1, y]);
+        int dRight =HeightDifference(evalution[x, y], evalution[x + 1, y]);
+        int dBack = HeightDifference(evalution[x, y], evalution[x, y - 1]);
+        int dForward = HeightDifference(evalution[x, y], evalution[x, y + 1]);
         return Math.Max(dLeft, Math.Max(dRight, Math.Max(dBack, dForward)));
     }
 
