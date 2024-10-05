@@ -8,6 +8,7 @@ namespace Sample
 {
     public class GhostScript : MonoBehaviour
     {
+        AudioManager audioManager;
         public int keyCount = 0;
         private Animator Anim;
         private CharacterController Ctrl;
@@ -51,6 +52,11 @@ namespace Sample
         float turnSmoothVelocity;
 
         public Action<int> onKeyCollected;
+
+        private void Awake()
+        {
+            audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        }
 
         void Start()
         {
@@ -239,6 +245,7 @@ namespace Sample
         {
             if (Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == MoveState)
             {
+                audioManager.PlaySFX(audioManager.movementSFX);
                 if (Input.GetKey(KeyCode.W))
                 {
                     MOVE_Velocity(new Vector3(0, 0, Speed), new Vector3(0, 0, 0));

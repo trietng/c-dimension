@@ -12,6 +12,7 @@ TagManager:
   - Box
   - Goal
   - Key
+  - Audio
   layers:
   - Default
   - TransparentFX
