@@ -18,6 +18,7 @@ public class WeatherScript : MonoBehaviour {
     public WeatherType altWeatherType = WeatherType.Clear;
     public AudioClip rainSound;
     public AudioClip lightningSound;
+    public bool followPlayer = true;
 
     void Start() {
         rain = transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -41,7 +42,7 @@ public class WeatherScript : MonoBehaviour {
         // Weather always starts with a clear sky
         int dice = UnityEngine.Random.Range(1, 100);
         // 35% chance of rain
-        dice = 90; // DEBUG
+        // dice = 90; // DEBUG
         if (dice > 65) {
             switch (altWeatherType) {
                 case WeatherType.Rain:
@@ -62,7 +63,10 @@ public class WeatherScript : MonoBehaviour {
         audioSource[0].Play();
         sun.intensity = 0f;
         Camera.main.GetComponent<Skybox>().material = rainSkyboxMaterial;
-        StartCoroutine(FollowPlayer());
+        if (followPlayer)
+        {
+            StopCoroutine(FollowPlayer());
+        }
         StartCoroutine(Lightning());
     }
 
