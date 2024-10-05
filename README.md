@@ -35,3 +35,5 @@ All assets, sound effects and shaders used in this project were downloaded from 
 - http://gregschlom.com/devlog/2014/06/29/Poisson-disc-sampling-Unity.html
 - https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633
 - https://opengameart.org/content/bullet-decal
+- https://freesound.org/people/cobratronik/sounds/117136/
+- https://freesound.org/people/Erokia/sounds/427396/
