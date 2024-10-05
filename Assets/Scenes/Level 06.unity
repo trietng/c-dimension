@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15896621, g: 0.51753515, b: 1.0392404, a: 1}
+  m_IndirectSpecularColor: {r: 0.15900815, g: 0.51751715, b: 1.0386043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -627,6 +627,10 @@ MonoBehaviour:
   - {fileID: 5539516120821248522, guid: 8518304cedfd2354db98de5bfdeefce0, type: 3}
   - {fileID: 2953033803653983844, guid: 56e6644e37faa5640b8919d83514936f, type: 3}
   - {fileID: 762429816026480467, guid: f9defcc5cfc1e1a409350f5c22acf17f, type: 3}
+  bedrockPrefab: {fileID: 2707342583752661503, guid: 5b2344c95568efc47b65c03c38e8f791,
+    type: 3}
+  goalPrefab: {fileID: 3023151987096609136, guid: 06469a891c207f948b57d1122c81024b,
+    type: 3}
   HEIGHT: 64
   WIDTH: 64
   DEPTH: 16
@@ -1080,7 +1084,7 @@ MonoBehaviour:
   MeshR: []
   Speed: 4
   pushStrength: 2
-  JumpForce: 4
+  JumpForce: 6
   enableJump: 1
   enable3rdPerson: 1
   respawnPosition: {x: 32, y: 17, z: 32}
