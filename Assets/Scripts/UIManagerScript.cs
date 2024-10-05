@@ -10,6 +10,8 @@ public class UIManagerScript : MonoBehaviour
     [SerializeField] public Canvas mainMenuCanvas;
     [SerializeField] public Canvas levelSelectionCanvas;
 
+    [SerializeField] public Canvas settingsPanel;
+
     [SerializeField] public GameObject worldCube;
 
     [SerializeField] public Vector3 initialPosition = new Vector3(50, 0, -100);

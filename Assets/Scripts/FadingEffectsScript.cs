@@ -29,6 +29,7 @@ public class FadingEffectsScript : MonoBehaviour
             else {
                 fadeIn = false;
                 visible = true;
+                objective.GetComponent<Canvas>().sortingOrder = 1;
             }
         }
 
@@ -39,6 +40,7 @@ public class FadingEffectsScript : MonoBehaviour
             else {
                 fadeOut = false;
                 visible = false;
+                objective.GetComponent<Canvas>().sortingOrder = -1;
             }
         }
     }

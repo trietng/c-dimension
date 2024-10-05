@@ -25,6 +25,8 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
 
     [SerializeField] GameObject gameMaster;
 
+    [SerializeField] public Button backButton;
+
     [SerializeField] Vector3[] facesFocus = new Vector3[6] {
         new Vector3(0, 0, 0),
         new Vector3(0, -90, 0),
@@ -92,7 +94,7 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
     void Start()
     {
         // get level buttons
-        Button[] buttons = transform.GetComponentsInChildren<Button>();
+        Button[] buttons = transform.GetComponentsInChildren<Button>(true);
         for (int i = 0; i < 6; ++i) {
             int _this = i;
             Button button = Array.Find(buttons, x => x.name.Contains("C0" + (i + 1).ToString() + "Button"));
@@ -104,7 +106,7 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         }
 
         // get texts
-        TextMeshProUGUI[] texts = transform.GetComponentsInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI[] texts = transform.GetComponentsInChildren<TextMeshProUGUI>(true);
         levelNameElement = Array.Find(texts, x => x.name.Contains("LevelName"));
         levelDescriptionElement = Array.Find(texts, x => x.name.Contains("LevelDescription"));
 
@@ -118,7 +120,6 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         });
 
         // get back button
-        Button backButton = Array.Find(buttons, x => x.name.Contains("BackButton"));
         backButton.onClick.AddListener(() => {
             if (inactive) return;
             setInactive();
@@ -183,6 +184,9 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
     // Update is called once per frame
     void Update()
     {
-        
+        if (!inactive && Input.GetKeyDown(KeyCode.Escape)) {
+            setInactive();
+            StartCoroutine(backToMenu());
+        }
     }
 }

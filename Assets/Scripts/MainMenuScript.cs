@@ -15,7 +15,6 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] Button quitButton;
 
     [SerializeField] public bool inactive = false;
-    [SerializeField] Canvas audioSettingsCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +28,7 @@ public class MainMenuScript : MonoBehaviour
         settingsButton.onClick.AddListener(() => {
             if (inactive) return;
             inactive = true;
-            ShowAudioSettins();
-
-            
+            StartCoroutine(showSettings());
         });
 
         quitButton.onClick.AddListener(() => {
@@ -39,10 +36,12 @@ public class MainMenuScript : MonoBehaviour
         });
     }
 
-    IEnumerator ShowAudioSettins () {
+    IEnumerator showSettings () {
         FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
         mainMenuScript.hide();
         yield return new WaitUntil(() => !mainMenuScript.visible);
+        gameMaster.GetComponent<UIManagerScript>().settingsPanel.GetComponent<FadingEffectsScript>().show();
+        gameMaster.GetComponent<UIManagerScript>().settingsPanel.GetComponent<SettingsPanelScript>().setActive();
     }
 
 
