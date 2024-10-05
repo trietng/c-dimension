@@ -17,6 +17,15 @@ public class TargetDisintegrationScript : MonoBehaviour {
         exploder = fragments.Where(fragment => fragment.gameObject.CompareTag("TargetExploder")).First();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Projectile"))
+        {
+            Debug.LogWarning("Contacted");
+            StartCoroutine(Disintegrate());
+        }
+    }
+
     public IEnumerator Disintegrate() {
         GetComponent<BoxCollider>().enabled = false;
         foreach (Rigidbody fragment in fragments) {
