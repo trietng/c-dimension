@@ -14,6 +14,5 @@ public class DEBUGExecutorScript : MonoBehaviour {
     // Perform some debugging operations
     IEnumerator Execute() {
         yield return new WaitForSeconds(delay);
-        StartCoroutine(debugObject.GetComponent<TargetDisintegrationScript>().Disintegrate());
     }
 }

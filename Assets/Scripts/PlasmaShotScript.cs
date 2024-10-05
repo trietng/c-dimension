@@ -11,12 +11,18 @@ public class PlasmaShotScript : MonoBehaviour
 		transform.position += 10f * Time.deltaTime * transform.forward;
 	}
 
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     if (!collision.gameObject.CompareTag("Cannon") && !collision.gameObject.CompareTag("Projectile"))
-    //     {
-    //         Destroy(gameObject);
-    //     }
-
-    // }
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Target"))
+        {
+            if (other.gameObject.TryGetComponent<TargetDisintegrationScript>(out var target))
+            {
+                StartCoroutine(target.Disintegrate());
+            }
+        }
+        if (!other.gameObject.CompareTag("PlayerObj") && !other.gameObject.CompareTag("Projectile"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }
