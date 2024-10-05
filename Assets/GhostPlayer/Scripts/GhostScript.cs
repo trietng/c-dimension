@@ -397,7 +397,7 @@ namespace Sample
                 respawnPosition = other.transform.position;
                 respawnAngle = other.transform.eulerAngles.y;
 
-                other.gameObject.SetActive(false);
+                other.transform.parent.gameObject.SetActive(false);
             } 
             else if (other.CompareTag("Goal"))
             {
