@@ -367,7 +367,6 @@ GameObject:
   - component: {fileID: 624323546}
   - component: {fileID: 624323545}
   - component: {fileID: 624323544}
-  - component: {fileID: 624323547}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -444,7 +443,6 @@ Transform:
   - {fileID: 736310476}
   - {fileID: 198531409}
   - {fileID: 1208853888}
-  - {fileID: 776059029}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &736310475
@@ -1086,9 +1084,6 @@ SceneRoots:
   - {fileID: 624323546}
   - {fileID: 1026584659}
   - {fileID: 460864038}
-  - {fileID: 1403297595}
-  - {fileID: 386152008}
-  - {fileID: 1080217338}
   - {fileID: 1182258407}
   - {fileID: 1474506597}
   - {fileID: 1468405488}
