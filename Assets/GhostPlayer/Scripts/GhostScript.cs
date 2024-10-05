@@ -367,7 +367,7 @@ namespace Sample
 
         private void respawnBtn()
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R) || gameObject.transform.position.y < 0)
             {
                 Respawn();
             }
