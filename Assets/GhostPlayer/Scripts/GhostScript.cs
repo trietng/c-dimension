@@ -246,6 +246,7 @@ namespace Sample
             if (Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == MoveState)
             {
                 audioManager.PlaySFX(audioManager.movementSFX);
+
                 if (Input.GetKey(KeyCode.W))
                 {
                     MOVE_Velocity(new Vector3(0, 0, Speed), new Vector3(0, 0, 0));
@@ -300,6 +301,7 @@ namespace Sample
         //---------------------------------------------------------------------
         private void MOVE_Velocity(Vector3 velocity, Vector3 rot)
         {
+
             MoveDirection = new Vector3(velocity.x, MoveDirection.y, velocity.z);
             if (Ctrl.enabled)
             {
@@ -317,6 +319,7 @@ namespace Sample
         {
             if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
             {
+
                 Anim.CrossFade(MoveState, 0.1f, 0, 0);
             }
         }
@@ -384,6 +387,8 @@ namespace Sample
         {
             if (other.CompareTag("Trap") || other.CompareTag("Projectile"))
             {
+                audioManager.PlaySFX(audioManager.deadSFX);
+
                 Respawn();
             }
             else if (other.CompareTag("savepoint"))
