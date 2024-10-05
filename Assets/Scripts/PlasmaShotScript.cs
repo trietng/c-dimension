@@ -8,7 +8,7 @@ public class PlasmaShotScript : MonoBehaviour
     // Update is called once per frame
     void Update () 
     {
-		transform.position += 1f * Time.deltaTime * transform.forward;
+		transform.position += 10f * Time.deltaTime * transform.forward;
 	}
 
     // void OnCollisionEnter(Collision collision)
