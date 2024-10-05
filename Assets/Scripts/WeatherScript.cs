@@ -3,12 +3,19 @@ using System.Collections;
 using UnityEngine;
 
 public class WeatherScript : MonoBehaviour {
+    public enum WeatherType {
+        Clear,
+        Rain,
+        Snow
+    }
+
     public Material rainSkyboxMaterial;
     private ParticleSystem rain;
     private Light lightning;
     private Light sun;
     private GameObject player;
     private AudioSource[] audioSource;
+    public WeatherType altWeatherType = WeatherType.Clear;
     public AudioClip rainSound;
     public AudioClip lightningSound;
 
@@ -34,9 +41,17 @@ public class WeatherScript : MonoBehaviour {
         // Weather always starts with a clear sky
         int dice = UnityEngine.Random.Range(1, 100);
         // 35% chance of rain
-        // dice = 90; // DEBUG
+        dice = 90; // DEBUG
         if (dice > 65) {
-            Rain();
+            switch (altWeatherType) {
+                case WeatherType.Rain:
+                    Rain();
+                    break;
+                case WeatherType.Snow:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

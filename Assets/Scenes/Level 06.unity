@@ -637,6 +637,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2483644870962751044, guid: 6e93e98457e30f145912d11b908a4fee,
+        type: 3}
+      propertyPath: weatherType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483644870962751044, guid: 6e93e98457e30f145912d11b908a4fee,
+        type: 3}
+      propertyPath: altWeatherType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

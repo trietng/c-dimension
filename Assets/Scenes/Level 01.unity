@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15897954, g: 0.5175394, b: 1.0392612, a: 1}
+  m_IndirectSpecularColor: {r: 0.15900815, g: 0.51751715, b: 1.0386043, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 410087040}
   - component: {fileID: 410087042}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2087,6 +2087,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ghost
       objectReference: {fileID: 0}
+    - target: {fileID: 19588385245968726, guid: 8ee08d04ad5df46fbb2e97260b63420b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 796652407307068396, guid: 8ee08d04ad5df46fbb2e97260b63420b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2277,6 +2282,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062289439}
   m_CullTransparentMesh: 1
+--- !u!1001 &2124304995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1071722390638462, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_Name
+      value: Weather
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120947682014248, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483644870962751044, guid: 6e93e98457e30f145912d11b908a4fee,
+        type: 3}
+      propertyPath: weatherType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2483644870962751044, guid: 6e93e98457e30f145912d11b908a4fee,
+        type: 3}
+      propertyPath: altWeatherType
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6e93e98457e30f145912d11b908a4fee, type: 3}
 --- !u!1 &2124856465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,6 +2362,7 @@ GameObject:
   - component: {fileID: 2124856467}
   - component: {fileID: 2124856466}
   - component: {fileID: 2124856470}
+  - component: {fileID: 2124856471}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2430,6 +2503,15 @@ MonoBehaviour:
   zoomSpeed: 5
   moveSpeed: 5
   rotationSpeed: 5
+--- !u!45 &2124856471
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124856465}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2448,3 +2530,4 @@ SceneRoots:
   - {fileID: 1031855075}
   - {fileID: 1311161756}
   - {fileID: 1366757865}
+  - {fileID: 2124304995}
