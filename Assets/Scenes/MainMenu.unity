@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18643808, g: 0.52178866, b: 0.83458036, a: 1}
+  m_IndirectSpecularColor: {r: 0.18631649, g: 0.5225311, b: 0.8326769, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6200,6 +6200,7 @@ GameObject:
   - component: {fileID: 1998014339}
   - component: {fileID: 1998014338}
   - component: {fileID: 1998014340}
+  - component: {fileID: 1998014341}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -6250,6 +6251,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 56801399}
   isPaused: 0
+--- !u!114 &1998014341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998014337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59972f10dae68b24faaa1a434c20bf4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursor: {fileID: 2800000, guid: d20be9caedb83b646a135b5403207585, type: 3}
+  cursorClicked: {fileID: 2800000, guid: 40a3721fc999f50479ffefbc686dab87, type: 3}
 --- !u!1 &2015147587
 GameObject:
   m_ObjectHideFlags: 0
