@@ -31,7 +31,7 @@ public class ProceduralGenerationScript : MonoBehaviour
     // Spawn point for player that avoids water
     private Vector3 playerSpawnPoint;
     private readonly HashSet<Vector2> blacklist = new();
-    private const int playerGoalMinimumDistance = 8;
+    public int playerGoalMinimumDistance = 12;
 
     void Start()
     {
