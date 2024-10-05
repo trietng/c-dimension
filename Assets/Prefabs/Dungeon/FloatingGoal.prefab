@@ -185,6 +185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloatingController
       objectReference: {fileID: 0}
+    - target: {fileID: 7769313240581828310, guid: 43e73a78fe44770499de3253e6a309e5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Goal
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
