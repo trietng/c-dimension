@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("LevelUnlocked", 1);
         }
+
+        Debug.Log("Unlocked Level: " + PlayerPrefs.GetInt("LevelUnlocked"));
     }
 
     public void CheckAllPads()
@@ -52,6 +54,7 @@ public class GameManager : MonoBehaviour
 
     public void deleteProgress()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("LevelUnlocked", 1);
     }
 }
