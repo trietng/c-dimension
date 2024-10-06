@@ -18,6 +18,10 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioClip clickButtonSource;
 
+    [SerializeField] float volumeFadingSpeed = 0.8f;
+
+    private bool inLower = false;
+
     private void Start()
     {
         // make sure there is only one audio manager running at a time
@@ -30,6 +34,12 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(transform.gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
         startMusic();
+    }
+
+    private void Update () {
+        if (inLower && musicSource != null && musicSource.volume > 0) {
+            musicSource.volume -= Time.deltaTime * volumeFadingSpeed;
+        }
     }
 
     void OnSceneLoaded (Scene scene, LoadSceneMode mode) {
@@ -54,5 +64,9 @@ public class AudioManager : MonoBehaviour
 
     public void playClickButton () {
         SFXSource.PlayOneShot(clickButtonSource);
+    }
+
+    public void fadeMusic () {
+        inLower = true;
     }
 }

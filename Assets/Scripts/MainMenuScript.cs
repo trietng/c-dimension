@@ -75,6 +75,9 @@ public class MainMenuScript : MonoBehaviour
         FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
         mainMenuScript.hide();
 
+        // start fading volume
+        GameObject.Find("Audio Manager").GetComponent<AudioManager>().fadeMusic();
+
         // go away from the cube
         UIManagerScript script = gameMaster.GetComponent<UIManagerScript>();
         script.moveCameraTo(new Vector3(script.worldCube.transform.position.x, script.initialPosition.y, script.initialPosition.z));
