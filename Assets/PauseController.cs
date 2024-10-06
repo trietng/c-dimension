@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class PauseController : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public GameObject tutorial;
+
     public bool isPaused = false;
 
     void Start()
@@ -17,6 +19,11 @@ public class PauseController : MonoBehaviour
         {
             pauseMenu.SetActive(false);
         }
+
+        if (tutorial != null)
+        {
+            tutorial.SetActive(false);
+        }
     }
 
     void Update()
@@ -25,7 +32,11 @@ public class PauseController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (isPaused)
+                if (tutorial.activeSelf)
+                {
+                    BackToPauseMenu();
+                }
+                else if (isPaused)
                 {
                     ResumeGame();
                 }
@@ -43,6 +54,7 @@ public class PauseController : MonoBehaviour
         Cursor.visible = true;
 
         pauseMenu.SetActive(true);
+
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -58,6 +70,24 @@ public class PauseController : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+    }
+
+    public void ShowTutorial()
+    {
+        if (tutorial != null)
+        {
+            tutorial.SetActive(true);
+            pauseMenu.SetActive(false);
+        }
+    }
+
+    public void BackToPauseMenu()
+    {
+        if (pauseMenu != null && tutorial != null)
+        {
+            pauseMenu.SetActive(true);
+            tutorial.SetActive(false);
+        }
     }
 
     public void toMenu()
