@@ -14,6 +14,8 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     private string intialText;
     private TextMeshProUGUI textElement;
+
+    private bool hiddenHover = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,16 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     // Update is called once per frame
     void Update()
     {
-        
+        if (hiddenHover && isClickable()) {
+            setHoverEffect();
+            hiddenHover = false;
+        }
+    }
+
+    private void setHoverEffect () {
+        audioManager.playHoverButton();
+        textElement.text = style.Replace("%s", intialText);
+        textElement.fontStyle = TMPro.FontStyles.Bold;
     }
 
     public void setInitialText (string text) {
@@ -40,14 +51,13 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (!isClickable()) return;
-        audioManager.playHoverButton();
-        textElement.text = style.Replace("%s", intialText);
-        textElement.fontStyle = TMPro.FontStyles.Bold;
+        if (!isClickable()) hiddenHover = true;
+        else setHoverEffect();
     }
 
     public void OnPointerExit(PointerEventData eventData) {
         textElement.text = intialText;
         textElement.fontStyle = TMPro.FontStyles.Normal;
+        hiddenHover = false;
     }
 }
