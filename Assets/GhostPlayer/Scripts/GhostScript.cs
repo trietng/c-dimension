@@ -245,7 +245,7 @@ namespace Sample
         {
             if (Anim.GetCurrentAnimatorStateInfo(0).fullPathHash == MoveState)
             {
-                audioManager.PlaySFX(audioManager.movementSFX);
+                // audioManager.PlaySFX(audioManager.movementSFX);
 
                 if (Input.GetKey(KeyCode.W))
                 {
