@@ -31,6 +31,7 @@ public class FadingEffectsScript : MonoBehaviour
                 visible = true;
                 objective.GetComponent<Canvas>().sortingOrder = 1;
             }
+            return;
         }
 
         if (fadeOut) {
