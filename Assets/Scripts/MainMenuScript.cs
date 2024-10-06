@@ -12,7 +12,7 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] GameObject gameMaster;
     [SerializeField] Button playButton;
 
-    [SerializeField] Button resetButton;
+    [SerializeField] Button tutorialButton;
     [SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
 
@@ -27,10 +27,10 @@ public class MainMenuScript : MonoBehaviour
             StartCoroutine(toSelectionScreen());
         });
 
-        resetButton.onClick.AddListener(() => {
+        tutorialButton.onClick.AddListener(() => {
             if (inactive) return;
             inactive = true;
-            StartCoroutine(toResetScreen());
+            StartCoroutine(toTutorialScreen());
         });
 
         settingsButton.onClick.AddListener(() => {
@@ -52,21 +52,20 @@ public class MainMenuScript : MonoBehaviour
         gameMaster.GetComponent<UIManagerScript>().settingsPanel.GetComponent<SettingsPanelScript>().setActive();
     }
 
-    IEnumerator toResetScreen () {
-        FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
-        mainMenuScript.hide();
-        yield return new WaitUntil(() => !mainMenuScript.visible);
-        gameMaster.GetComponent<UIManagerScript>().resetProgressPanel.GetComponent<FadingEffectsScript>().show();
-        gameMaster.GetComponent<UIManagerScript>().resetProgressPanel.GetComponent<ProgressResetMenuScript>().setActive();
-    }
-
-
     IEnumerator toSelectionScreen () {
         FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
         mainMenuScript.hide();
         yield return new WaitUntil(() => !mainMenuScript.visible);
         gameMaster.GetComponent<UIManagerScript>().levelSelectionCanvas.GetComponent<FadingEffectsScript>().show();
         gameMaster.GetComponent<UIManagerScript>().levelSelectionCanvas.GetComponent<LevelSelectionScript>().setActive();
+    }
+
+    IEnumerator toTutorialScreen () {
+        FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
+        mainMenuScript.hide();
+        yield return new WaitUntil(() => !mainMenuScript.visible);
+        gameMaster.GetComponent<UIManagerScript>().tutorialCanvas.GetComponent<FadingEffectsScript>().show();
+        gameMaster.GetComponent<UIManagerScript>().tutorialCanvas.GetComponent<SettingsPanelScript>().setActive();
     }
 
     public void ChangeStatusActive () {

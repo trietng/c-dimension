@@ -22,7 +22,7 @@ public class ProgressResetMenuScript : MonoBehaviour
         noButton.onClick.AddListener(() => {
             if (inactive) return;
             setInactive();
-            StartCoroutine(backToMenu());
+            StartCoroutine(toSelectionScreen());
         });
 
         yesButton.onClick.AddListener(() => {
@@ -41,14 +41,6 @@ public class ProgressResetMenuScript : MonoBehaviour
         inactive = true;
     }
 
-    IEnumerator backToMenu () {
-        FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
-        mainMenuScript.hide();
-        yield return new WaitUntil(() => !mainMenuScript.visible);
-        gameMaster.GetComponent<UIManagerScript>().mainMenuCanvas.GetComponent<FadingEffectsScript>().show();
-        gameMaster.GetComponent<UIManagerScript>().mainMenuCanvas.GetComponent<MainMenuScript>().inactive = false;
-    }
-
     IEnumerator toSelectionScreen () {
         FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
         mainMenuScript.hide();
@@ -62,7 +54,7 @@ public class ProgressResetMenuScript : MonoBehaviour
     {
         if (!inactive && Input.GetKeyDown(KeyCode.Escape)) {
             setInactive();
-            StartCoroutine(backToMenu());
+            StartCoroutine(toSelectionScreen());
         }
     }
 }

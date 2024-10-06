@@ -42,7 +42,7 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
 
     private Button[] levelButtons = new Button[6];
 
-    private Button playButton;
+    private Button playButton, resetButton;
 
     private TextMeshProUGUI levelNameElement, levelDescriptionElement;
 
@@ -131,6 +131,13 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
             setInactive();
             StartCoroutine(backToMenu());
         });
+
+        resetButton = Array.Find(buttons, x => x.name.Contains("ResetButton"));
+        resetButton.onClick.AddListener(() => {
+            if (inactive) return;
+            setInactive();
+            StartCoroutine(toResetScreen());
+        });
     }
 
     public void setActive () {
@@ -151,6 +158,14 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
     private int getCurrentLevel () {
         if (!isPlayable()) currentLevel = 0;
         return currentLevel;
+    }
+
+    IEnumerator toResetScreen () {
+        FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
+        mainMenuScript.hide();
+        yield return new WaitUntil(() => !mainMenuScript.visible);
+        gameMaster.GetComponent<UIManagerScript>().resetProgressPanel.GetComponent<FadingEffectsScript>().show();
+        gameMaster.GetComponent<UIManagerScript>().resetProgressPanel.GetComponent<ProgressResetMenuScript>().setActive();
     }
 
     IEnumerator backToMenu () {
