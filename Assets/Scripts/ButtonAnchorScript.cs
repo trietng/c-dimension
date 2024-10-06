@@ -35,6 +35,10 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
         
     }
 
+    public void setInitialText (string text) {
+        intialText = text;
+    }
+
     public void OnPointerEnter(PointerEventData eventData) {
         if (!isClickable()) return;
         audioManager.playHoverButton();

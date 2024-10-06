@@ -46,6 +46,8 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
 
     private TextMeshProUGUI levelNameElement, levelDescriptionElement;
 
+    private ButtonAnchorScript playButtonScript;
+
     public void OnBeforeSerialize()
     {
 
@@ -82,11 +84,13 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         
         if (levels[currentLevel].playable && isPlayable()) {
             playButton.GetComponentInChildren<TextMeshProUGUI>().text = "PLAY LEVEL";
-            playButton.GetComponent<ButtonAnchorScript>().unclickable = false;
+            playButtonScript.setInitialText("PLAY LEVEL");
+            playButtonScript.unclickable = false;
         }
         else {
             playButton.GetComponentInChildren<TextMeshProUGUI>().text = "LOCKED";
-            playButton.GetComponent<ButtonAnchorScript>().unclickable = true;
+            playButtonScript.setInitialText("LOCKED");
+            playButtonScript.unclickable = true;
         }
     }
 
@@ -118,6 +122,8 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
             inactive = true;
             StartCoroutine(toGameLevel());
         });
+
+        playButtonScript = playButton.GetComponent<ButtonAnchorScript>();
 
         // get back button
         backButton.onClick.AddListener(() => {
