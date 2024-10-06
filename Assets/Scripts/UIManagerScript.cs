@@ -12,6 +12,8 @@ public class UIManagerScript : MonoBehaviour
 
     [SerializeField] public Canvas settingsPanel;
 
+    [SerializeField] public Canvas resetProgressPanel;
+
     [SerializeField] public GameObject worldCube;
 
     [SerializeField] public Vector3 initialPosition = new Vector3(50, 0, -100);

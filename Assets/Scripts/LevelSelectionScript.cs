@@ -80,7 +80,7 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         levelNameElement.GetComponentInChildren<TextMeshProUGUI>().text = levels[currentLevel].name;
         levelDescriptionElement.GetComponentInChildren<TextMeshProUGUI>().text = levels[currentLevel].description;
         
-        if (levels[currentLevel].playable) {
+        if (levels[currentLevel].playable && isPlayable()) {
             playButton.GetComponentInChildren<TextMeshProUGUI>().text = "PLAY LEVEL";
             playButton.GetComponent<ButtonAnchorScript>().unclickable = false;
         }
@@ -114,7 +114,7 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
         playButton = Array.Find(buttons, x => x.name.Contains("PlayButton"));
         playButton.onClick.AddListener(() => {
             if (inactive) return;
-            if (!levels[currentLevel].playable) return;
+            if (!levels[currentLevel].playable || !isPlayable()) return;
             inactive = true;
             StartCoroutine(toGameLevel());
         });
@@ -130,12 +130,21 @@ public class LevelSelectionScript : MonoBehaviour, ISerializationCallbackReceive
     public void setActive () {
         inactive = false;
         // load last level
-        loadLevelInfo(currentLevel);
+        loadLevelInfo(getCurrentLevel());
     }
 
     public void setInactive () {
         inactive = true;
         gameMaster.GetComponent<UIManagerScript>().worldCube.GetComponent<LevelCubesManager>().RotateToSurface(-1);
+    }
+
+    private bool isPlayable () {
+        return currentLevel < PlayerPrefs.GetInt("LevelUnlocked", 1);
+    }
+
+    private int getCurrentLevel () {
+        if (!isPlayable()) currentLevel = 0;
+        return currentLevel;
     }
 
     IEnumerator backToMenu () {

@@ -11,6 +11,8 @@ public class MainMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject gameMaster;
     [SerializeField] Button playButton;
+
+    [SerializeField] Button resetButton;
     [SerializeField] Button settingsButton;
     [SerializeField] Button quitButton;
 
@@ -23,6 +25,12 @@ public class MainMenuScript : MonoBehaviour
             if (inactive) return;
             inactive = true;
             StartCoroutine(toSelectionScreen());
+        });
+
+        resetButton.onClick.AddListener(() => {
+            if (inactive) return;
+            inactive = true;
+            StartCoroutine(toResetScreen());
         });
 
         settingsButton.onClick.AddListener(() => {
@@ -42,6 +50,14 @@ public class MainMenuScript : MonoBehaviour
         yield return new WaitUntil(() => !mainMenuScript.visible);
         gameMaster.GetComponent<UIManagerScript>().settingsPanel.GetComponent<FadingEffectsScript>().show();
         gameMaster.GetComponent<UIManagerScript>().settingsPanel.GetComponent<SettingsPanelScript>().setActive();
+    }
+
+    IEnumerator toResetScreen () {
+        FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
+        mainMenuScript.hide();
+        yield return new WaitUntil(() => !mainMenuScript.visible);
+        gameMaster.GetComponent<UIManagerScript>().resetProgressPanel.GetComponent<FadingEffectsScript>().show();
+        gameMaster.GetComponent<UIManagerScript>().resetProgressPanel.GetComponent<ProgressResetMenuScript>().setActive();
     }
 
 
