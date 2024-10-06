@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -17,20 +18,23 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     private string intialText;
     private TextMeshProUGUI textElement;
 
+    private Canvas canvasData;
+
     private bool hiddenHover = false;
     // Start is called before the first frame update
     void Start()
     {
         textElement = GetComponentInChildren<TextMeshProUGUI>();
+        canvasData = transform.parent.GetComponent<Canvas>();
         intialText = textElement.text;
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         transform.gameObject.GetComponent<Button>().onClick.AddListener(() => {
-            if (isClickable()) audioManager.playClickButton();
+            if (isClickable(true)) audioManager.playClickButton();
         });
     }
 
-    private bool isClickable () {
-        return !unclickable && transform.parent.GetComponent<Canvas>().sortingOrder >= 0;
+    private bool isClickable (bool doNotAddInactive = false) {
+        return !unclickable && (canvasData != null ? canvasData.sortingOrder >= 0 : (doNotAddInactive || transform.gameObject.activeInHierarchy));
     }
 
     // Update is called once per frame
@@ -48,6 +52,13 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
         textElement.fontStyle = TMPro.FontStyles.Bold;
     }
 
+    private void resetHoverEffect () {
+        if (noHoverEffect || textElement == null) return;
+        textElement.text = intialText;
+        textElement.fontStyle = TMPro.FontStyles.Normal;
+        hiddenHover = false;
+    }
+
     public void setInitialText (string text) {
         intialText = text;
     }
@@ -58,9 +69,10 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        if (noHoverEffect) return;
-        textElement.text = intialText;
-        textElement.fontStyle = TMPro.FontStyles.Normal;
-        hiddenHover = false;
+        resetHoverEffect();
+    }
+
+    void OnEnable () {
+        resetHoverEffect();
     }
 }

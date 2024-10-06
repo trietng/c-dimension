@@ -40,7 +40,9 @@ public class MainMenuScript : MonoBehaviour
         });
 
         quitButton.onClick.AddListener(() => {
-            Application.Quit();
+            if (inactive) return;
+            inactive = true;
+            StartCoroutine(byeBye());
         });
     }
 
@@ -66,6 +68,31 @@ public class MainMenuScript : MonoBehaviour
         yield return new WaitUntil(() => !mainMenuScript.visible);
         gameMaster.GetComponent<UIManagerScript>().tutorialCanvas.GetComponent<FadingEffectsScript>().show();
         gameMaster.GetComponent<UIManagerScript>().tutorialCanvas.GetComponent<SettingsPanelScript>().setActive();
+    }
+
+    IEnumerator byeBye () {
+        // hide menu
+        FadingEffectsScript mainMenuScript = transform.GetComponent<FadingEffectsScript>();
+        mainMenuScript.hide();
+
+        // go away from the cube
+        UIManagerScript script = gameMaster.GetComponent<UIManagerScript>();
+        script.moveCameraTo(new Vector3(script.worldCube.transform.position.x, script.initialPosition.y, script.initialPosition.z));
+        yield return new WaitUntil(() => !mainMenuScript.visible);
+        yield return new WaitForSeconds(0.5f);
+        // enable back if also move z
+        // script.moveCameraTo(new Vector3(0, 0, script.initialPosition.z));
+        // yield return new WaitForSeconds(1.0f);
+
+        // move far away from cube in z axis + start showing black screen
+        script.byeBye.GetComponent<FadingEffectsScript>().show();
+        script.movingSpeed = 0.1f;
+        script.moveCameraTo(new Vector3(script.worldCube.transform.position.x, script.worldCube.transform.position.y, -6969));
+
+        yield return new WaitForSeconds(1f);
+        
+        // yeet
+        Application.Quit();
     }
 
     public void ChangeStatusActive () {

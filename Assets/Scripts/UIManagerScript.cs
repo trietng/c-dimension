@@ -16,6 +16,8 @@ public class UIManagerScript : MonoBehaviour
 
     [SerializeField] public Canvas tutorialCanvas;
 
+    [SerializeField] public Canvas byeBye;
+
     [SerializeField] public GameObject worldCube;
 
     [SerializeField] public Vector3 initialPosition = new Vector3(50, 0, -100);
