@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18643808, g: 0.52178866, b: 0.83458036, a: 1}
+  m_IndirectSpecularColor: {r: 0.18631649, g: 0.5225311, b: 0.8326769, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13598,7 +13598,7 @@ PrefabInstance:
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.size
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
@@ -13614,37 +13614,37 @@ PrefabInstance:
         type: 3}
       propertyPath: backgroundMusic.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: 559c232a43caebe41870ce54786f604e, type: 3}
+      objectReference: {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
+      objectReference: {fileID: 8300000, guid: 35967e8a4dfb1664e9b066939272c0a4, type: 3}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.data[4]
       value: 
-      objectReference: {fileID: 8300000, guid: 06906d718be5b6a4cb2df8732bf39832, type: 3}
+      objectReference: {fileID: 8300000, guid: 1f2ad53bacc245642854dbdc8ea71a9b, type: 3}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.data[5]
       value: 
-      objectReference: {fileID: 8300000, guid: 89f935015cc98724a862a586326fdf21, type: 3}
+      objectReference: {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.data[6]
       value: 
-      objectReference: {fileID: 8300000, guid: 0ad591428b0c18c4da51fe3bf98dbc63, type: 3}
+      objectReference: {fileID: 8300000, guid: bef0cef2ded0f0645ad90c6e5bdd4965, type: 3}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.data[7]
       value: 
-      objectReference: {fileID: 8300000, guid: bef0cef2ded0f0645ad90c6e5bdd4965, type: 3}
+      objectReference: {fileID: 8300000, guid: 35967e8a4dfb1664e9b066939272c0a4, type: 3}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.data[8]
       value: 
-      objectReference: {fileID: 8300000, guid: 35967e8a4dfb1664e9b066939272c0a4, type: 3}
+      objectReference: {fileID: 8300000, guid: 1f2ad53bacc245642854dbdc8ea71a9b, type: 3}
     - target: {fileID: 960946616422293382, guid: 685c43bb18331504ab777b62bb6a47d6,
         type: 3}
       propertyPath: backgroundMusic.Array.data[9]
