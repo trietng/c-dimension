@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sample;
 using UnityEngine;
 
 public class ProceduralGenerationScript : MonoBehaviour
@@ -28,8 +29,6 @@ public class ProceduralGenerationScript : MonoBehaviour
     private float[,] evalution;
     private static readonly float[] noise = { 1.00f, 0.50f, 0.25f, 0.13f, 0.06f, 0.03f };
 
-    // Spawn point for player that avoids water
-    private Vector3 playerSpawnPoint;
     private readonly HashSet<Vector2> blacklist = new();
     public int playerGoalMinimumDistance = 12;
 
@@ -195,9 +194,10 @@ public class ProceduralGenerationScript : MonoBehaviour
             Vector3 current = queue.Dequeue();
             if (!blacklist.Contains(new Vector2(current.x, current.z)))
             {
-                playerSpawnPoint = current;
+                Vector3 playerSpawnPoint = current;
                 playerSpawnPoint.y = Height(evalution[(int)current.x, (int)current.z]);
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.GetComponent<GhostScript>().SetRespawnPosition(playerSpawnPoint);
                 player.transform.position = playerSpawnPoint;
                 blacklist.UnionWith(Enumerable.Range(-playerGoalMinimumDistance, playerGoalMinimumDistance * 2 + 1)
                     .SelectMany(i => Enumerable.Range(-playerGoalMinimumDistance, playerGoalMinimumDistance * 2 + 1)

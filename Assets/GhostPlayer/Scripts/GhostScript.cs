@@ -416,5 +416,10 @@ namespace Sample
                 onKeyCollected(keyCount);
             }
         }
+
+        public void SetRespawnPosition(Vector3 position)
+        {
+            respawnPosition = position;
+        }
     }
 }
