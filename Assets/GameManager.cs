@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,18 +23,35 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Optionally initialize any other components or variables here if needed
+        if (!PlayerPrefs.HasKey("LevelUnlocked"))
+        {
+            PlayerPrefs.SetInt("LevelUnlocked", 1);
+        }
     }
 
     public void CheckAllPads()
     {
         if (triggerCounts == 3)
         {
+            saveProgress();
             StageComplete.Instance.SetUp();
         }
         else
         {
             StageComplete.Instance.endScreenCanvas.SetActive(false);
         }
+    }
+
+    public void saveProgress()
+    {
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        int unlockedLevel = PlayerPrefs.GetInt("LevelUnlocked", 1);
+
+        PlayerPrefs.SetInt("LevelUnlocked", Math.Max(currentLevel + 1, unlockedLevel));
+    }
+
+    public void deleteProgress()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

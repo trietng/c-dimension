@@ -130,6 +130,8 @@ public class FirstPersonMovements : MonoBehaviour
     {
         if (other.CompareTag("Goal"))
         {
+            GameManager.Instance.saveProgress();
+
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
