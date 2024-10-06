@@ -13,6 +13,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip movementSFX;
     public AudioClip deadSFX;
 
+    [SerializeField] AudioClip hoverButtonSource;
+
+    [SerializeField] AudioClip clickButtonSource;
+
     private void Start()
     {
         musicSource.clip = backgroundMusic;
@@ -26,4 +30,11 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(clip);
     }
 
+    public void playHoverButton () {
+        SFXSource.PlayOneShot(hoverButtonSource);
+    }
+
+    public void playClickButton () {
+        SFXSource.PlayOneShot(clickButtonSource);
+    }
 }

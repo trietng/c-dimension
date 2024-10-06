@@ -180,6 +180,8 @@ MonoBehaviour:
   backgroundMusic: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
   movementSFX: {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
   deadSFX: {fileID: 8300000, guid: 2b21ef916f6943c439b71a7c74568878, type: 3}
+  hoverButtonSource: {fileID: 8300000, guid: 6a96808e040b14ba6b627dfb9b03020d, type: 3}
+  clickButtonSource: {fileID: 8300000, guid: 02fcc24ca3d834d409fc95f0ca100fb9, type: 3}
 --- !u!1 &5711037845992621685
 GameObject:
   m_ObjectHideFlags: 0

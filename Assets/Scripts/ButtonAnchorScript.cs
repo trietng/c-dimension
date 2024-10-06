@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
@@ -8,6 +9,9 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
 {
     [SerializeField] public bool unclickable = false;
     [SerializeField] string style = "> %s <";
+
+    private AudioManager audioManager;
+
     private string intialText;
     private TextMeshProUGUI textElement;
     // Start is called before the first frame update
@@ -15,6 +19,14 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         textElement = GetComponentInChildren<TextMeshProUGUI>();
         intialText = textElement.text;
+        audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
+        transform.gameObject.GetComponent<Button>().onClick.AddListener(() => {
+            if (isClickable()) audioManager.playClickButton();
+        });
+    }
+
+    private bool isClickable () {
+        return !unclickable && transform.parent.GetComponent<Canvas>().sortingOrder >= 0;
     }
 
     // Update is called once per frame
@@ -24,13 +36,13 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (unclickable) return;
+        if (!isClickable()) return;
+        audioManager.playHoverButton();
         textElement.text = style.Replace("%s", intialText);
         textElement.fontStyle = TMPro.FontStyles.Bold;
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        if (unclickable) return;
         textElement.text = intialText;
         textElement.fontStyle = TMPro.FontStyles.Normal;
     }
