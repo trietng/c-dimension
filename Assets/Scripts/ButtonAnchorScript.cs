@@ -10,6 +10,8 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField] public bool unclickable = false;
     [SerializeField] string style = "> %s <";
 
+    [SerializeField] bool noHoverEffect = false;
+
     private AudioManager audioManager;
 
     private string intialText;
@@ -34,7 +36,7 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     // Update is called once per frame
     void Update()
     {
-        if (hiddenHover && isClickable()) {
+        if (hiddenHover && !noHoverEffect && isClickable()) {
             setHoverEffect();
             hiddenHover = false;
         }
@@ -51,11 +53,12 @@ public class ButtonAnchorScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        if (!isClickable()) hiddenHover = true;
+        if (noHoverEffect || !isClickable()) hiddenHover = true;
         else setHoverEffect();
     }
 
     public void OnPointerExit(PointerEventData eventData) {
+        if (noHoverEffect) return;
         textElement.text = intialText;
         textElement.fontStyle = TMPro.FontStyles.Normal;
         hiddenHover = false;
