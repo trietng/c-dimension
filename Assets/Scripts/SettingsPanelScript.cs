@@ -29,10 +29,14 @@ public class SettingsPanelScript : MonoBehaviour
 
     public void setActive () {
         inactive = false;
+        Slider[] sliders = transform.GetComponentsInChildren<Slider>(true);
+        foreach (Slider sl in sliders) sl.gameObject.SetActive(true);
     }
 
     public void setInactive () {
         inactive = true;
+        Slider[] sliders = transform.GetComponentsInChildren<Slider>(true);
+        foreach (Slider sl in sliders) sl.gameObject.SetActive(false);
     }
 
     IEnumerator backToMenu () {
