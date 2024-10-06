@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15900815, g: 0.51751715, b: 1.0386043, a: 1}
+  m_IndirectSpecularColor: {r: 0.15896338, g: 0.5172149, b: 1.0379918, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -773,7 +773,7 @@ MonoBehaviour:
   HEIGHT: 64
   WIDTH: 64
   DEPTH: 16
-  playerGoalMinimumDistance: 12
+  playerGoalMinimumDistance: 24
 --- !u!1 &1825842866
 GameObject:
   m_ObjectHideFlags: 0
