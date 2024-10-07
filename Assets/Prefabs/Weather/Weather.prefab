@@ -51,9 +51,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rainSkyboxMaterial: {fileID: 2100000, guid: 2039a0ad0a9d05549928b70362f54902, type: 2}
   altWeatherType: 0
-  rainSound: {fileID: 8300000, guid: 6352f9b67fb2c124e8dd60a099c5e461, type: 3}
+  rainSound: {fileID: 8300000, guid: 5c0374ccbf3e2704084fd4b60529fdf0, type: 3}
   lightningSound: {fileID: 8300000, guid: 4bf082dc372d76d4fbed830f32b4b801, type: 3}
-  snowSound: {fileID: 8300000, guid: 0af9662abf5583e4e811e2ef2535ec8e, type: 3}
+  snowSound: {fileID: 8300000, guid: 541a3fe3c5ff3184ea7786aa396620a3, type: 3}
   RainChance: 35
   SnowChance: 100
   followPlayer: 1
